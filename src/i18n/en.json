@@ -71,6 +71,7 @@
     "bookingSystem":   "Booking system"
   },
   "contact": {
+    "sectionTitle":      "Find us",
     "address":           "Address",
     "phone":             "Phone",
     "email":             "Email",
@@ -91,7 +92,8 @@
   "footer": {
     "navigation": "Navigation",
     "legal":      "Legal",
-    "allRights":  "All rights reserved."
+    "allRights":  "All rights reserved.",
+    "tagline":    "Traditional Canarian cuisine. Since 1987."
   },
   "common": {
     "loading": "Loading...",

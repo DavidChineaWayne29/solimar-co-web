@@ -18,7 +18,10 @@ export function Contact({ contact }: ContactProps) {
 
   return (
     <SectionWrapper id="contacto" bg="neutral">
-      <SectionHeader title={contact.title} subtitle={contact.subtitle} />
+      <SectionHeader
+        title={t('contact.sectionTitle', { defaultValue: contact.title })}
+        subtitle={contact.subtitle}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 

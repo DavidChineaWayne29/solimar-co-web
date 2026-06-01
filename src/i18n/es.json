@@ -71,6 +71,7 @@
     "bookingSystem":   "Sistema de reservas"
   },
   "contact": {
+    "sectionTitle":     "Encuéntranos",
     "address":          "Dirección",
     "phone":            "Teléfono",
     "email":            "Email",
@@ -91,7 +92,8 @@
   "footer": {
     "navigation": "Navegación",
     "legal":      "Legal",
-    "allRights":  "Todos los derechos reservados."
+    "allRights":  "Todos los derechos reservados.",
+    "tagline":    "Cocina canaria de siempre. Desde 1987."
   },
   "common": {
     "loading": "Cargando...",

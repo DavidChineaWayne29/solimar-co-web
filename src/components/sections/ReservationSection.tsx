@@ -61,7 +61,7 @@ export function ReservationSection({ reservation }: ReservationProps) {
   if (reservation.provider !== 'custom' && reservation.embedUrl) {
     return (
       <SectionWrapper id="reservas" bg="primary">
-        <SectionHeader title={reservation.title ?? t('reservation.title')} />
+        <SectionHeader title={t('reservation.title', { defaultValue: reservation.title ?? '' })} />
         <iframe
           src={reservation.embedUrl}
           className="w-full h-[600px] rounded-brand border-0"

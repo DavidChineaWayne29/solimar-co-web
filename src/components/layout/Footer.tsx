@@ -18,7 +18,9 @@ export function Footer({ siteName, nav, footer }: FooterProps) {
           <div>
             <p className="font-display text-xl text-white mb-3">{siteName}</p>
             {footer.tagline && (
-              <p className="font-body text-sm text-neutral-400">{footer.tagline}</p>
+              <p className="font-body text-sm text-neutral-400">
+                {t('footer.tagline', { defaultValue: footer.tagline })}
+              </p>
             )}
           </div>
 
