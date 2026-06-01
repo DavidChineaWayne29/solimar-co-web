@@ -42,6 +42,34 @@
     "all":       "Todos",
     "seeMore":   "Ver más"
   },
+  "dietary": {
+    "vegetariano": "Vegetariano",
+    "vegano":      "Vegano",
+    "singluten":   "Sin gluten",
+    "sinlactosa":  "Sin lactosa"
+  },
+  "allergenMap": {
+    "gluten":       "Gluten",
+    "lácteos":      "Lácteos",
+    "lactosa":      "Lactosa",
+    "huevo":        "Huevo",
+    "pescado":      "Pescado",
+    "mariscos":     "Mariscos",
+    "cacahuetes":   "Cacahuetes",
+    "frutossecos":  "Frutos secos",
+    "soja":         "Soja",
+    "apio":         "Apio",
+    "mostaza":      "Mostaza",
+    "sésamo":       "Sésamo",
+    "sulfitos":     "Sulfitos"
+  },
+  "menuCategories": {
+    "Entrantes":   "Entrantes",
+    "Principales": "Principales",
+    "Postres":     "Postres",
+    "Bebidas":     "Bebidas",
+    "Todos":       "Todos"
+  },
   "testimonials": {
     "title": "Lo que dicen nuestros clientes"
   },

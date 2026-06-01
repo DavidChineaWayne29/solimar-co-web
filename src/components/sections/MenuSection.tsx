@@ -21,21 +21,28 @@ function splitItem(item: MenuItem) {
   return { dietary, allergens }
 }
 
+// Normalise a label to a lookup key (remove spaces/accents-safe lowercase)
+function toKey(s: string) { return s.toLowerCase().replace(/[\s-]/g, '') }
+
 function DietaryBadge({ label }: { label: string }) {
-  const isVegan = label.toLowerCase().includes('vegano')
+  const { t } = useTranslation()
+  const isVegan = label.toLowerCase().includes('vegano') || label.toLowerCase().includes('vegan')
+  const translated = t(`dietary.${toKey(label)}`, { defaultValue: label })
   return (
     <span className="inline-flex items-center gap-1 text-xs font-body px-2 py-0.5 rounded-full bg-green-50 text-green-700 border border-green-200">
       {isVegan ? <Sprout size={11} /> : <Leaf size={11} />}
-      {label}
+      {translated}
     </span>
   )
 }
 
 function AllergenBadge({ label }: { label: string }) {
+  const { t } = useTranslation()
+  const translated = t(`allergenMap.${toKey(label)}`, { defaultValue: label })
   return (
     <span className="inline-flex items-center gap-1 text-xs font-body px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
       <AlertTriangle size={11} />
-      {label}
+      {translated}
     </span>
   )
 }
@@ -104,7 +111,7 @@ function DishModal({ item, onClose }: ModalProps) {
         {/* Content */}
         <div className="overflow-y-auto p-6 flex-1">
           <span className="inline-block font-body text-xs text-primary-600 uppercase tracking-wider mb-2">
-            {item.category}
+            {t(`menuCategories.${item.category}`, { defaultValue: item.category })}
           </span>
           <h3 className="font-display text-2xl text-neutral-900 mb-3">{item.name}</h3>
 
@@ -173,7 +180,7 @@ function DishCard({ item, onClick }: CardProps) {
         {/* Category badge */}
         <div className="absolute top-3 left-3">
           <span className="bg-white/90 backdrop-blur-sm font-body text-xs text-neutral-600 px-2 py-0.5 rounded-full">
-            {item.category}
+            {t(`menuCategories.${item.category}`, { defaultValue: item.category })}
           </span>
         </div>
         {/* Dietary icons top-right */}
@@ -222,7 +229,9 @@ interface MenuSectionProps {
 export function MenuSection({ menu }: MenuSectionProps) {
   const { t } = useTranslation()
   const { items } = useMenuData(menu.items)
-  const categories = [t('menu.all'), ...new Set(items.map((i) => i.category))]
+  // Raw category names from DB (in Spanish); we translate them for display only
+  const rawCategories = [...new Set(items.map((i) => i.category))]
+  const categories = [t('menu.all'), ...rawCategories]
   const [activeCategory, setActiveCategory] = useState('')
   const [selected, setSelected] = useState<MenuItem | null>(null)
 
@@ -251,7 +260,7 @@ export function MenuSection({ menu }: MenuSectionProps) {
                   : 'bg-white text-neutral-600 border-neutral-200 hover:border-primary-400 hover:text-primary-600'
               }`}
             >
-              {cat}
+              {t(`menuCategories.${cat}`, { defaultValue: cat })}
             </button>
           ))}
         </div>

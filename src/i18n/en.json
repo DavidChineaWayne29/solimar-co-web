@@ -42,6 +42,34 @@
     "all":       "All",
     "seeMore":   "See more"
   },
+  "dietary": {
+    "vegetariano": "Vegetarian",
+    "vegano":      "Vegan",
+    "singluten":   "Gluten-free",
+    "sinlactosa":  "Lactose-free"
+  },
+  "allergenMap": {
+    "gluten":       "Gluten",
+    "lácteos":      "Dairy",
+    "lactosa":      "Lactose",
+    "huevo":        "Egg",
+    "pescado":      "Fish",
+    "mariscos":     "Shellfish",
+    "cacahuetes":   "Peanuts",
+    "frutossecos":  "Tree nuts",
+    "soja":         "Soy",
+    "apio":         "Celery",
+    "mostaza":      "Mustard",
+    "sésamo":       "Sesame",
+    "sulfitos":     "Sulphites"
+  },
+  "menuCategories": {
+    "Entrantes":   "Starters",
+    "Principales": "Mains",
+    "Postres":     "Desserts",
+    "Bebidas":     "Drinks",
+    "Todos":       "All"
+  },
   "testimonials": {
     "title": "What our customers say"
   },
