@@ -4,7 +4,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './styles/globals.css'
 import './i18n'
 import { App } from './App'
-import { siteConfig } from './config/restaurant.config'
+
+/**
+ * ─── SELECCIÓN DE CONFIG POR CLIENTE ──────────────────────────────────────
+ *
+ * Para cada cliente nuevo, crea su config y cámbialo aquí:
+ *
+ *   import { siteConfig } from './config/base.config'        ← genérico
+ *   import { siteConfig } from './config/restaurant.config'  ← restaurante
+ *   import { siteConfig } from './config/fashion.config'     ← moda
+ *   import { siteConfig } from './config/health.config'      ← salud/belleza
+ *   import { siteConfig } from './config/hotel.config'       ← hotel
+ *
+ * O usa la variable de entorno VITE_SITE_CONFIG para cargarlo dinámicamente
+ * según el entorno de Vercel (un proyecto Vercel por cliente).
+ */
+import { siteConfig } from './config/base.config'
 
 const AdminPage = lazy(() =>
   import('./pages/AdminPage').then((m) => ({ default: m.AdminPage }))
