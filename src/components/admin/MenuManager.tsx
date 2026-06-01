@@ -24,6 +24,7 @@ const emptyForm = {
   id: '',
   name: '',
   description: '',
+  description_en: '',
   price: '',
   allergens: '',
   image: '',
@@ -122,6 +123,7 @@ export function MenuManager() {
       id: item.id,
       name: item.name,
       description: item.description ?? '',
+      description_en: (item as any).description_en ?? '',
       price: item.price,
       allergens: item.allergens?.join(', ') ?? '',
       image: item.image ?? '',
@@ -145,6 +147,7 @@ export function MenuManager() {
     const payload = {
       name: form.name.trim(),
       description: form.description.trim() || null,
+      description_en: form.description_en.trim() || null,
       price: form.price.trim(),
       allergens: form.allergens
         ? form.allergens.split(',').map((s) => s.trim()).filter(Boolean)
@@ -326,11 +329,21 @@ export function MenuManager() {
               />
             </div>
             <div className="sm:col-span-2">
-              <label className={labelClass}>{t('admin.menu.description')}</label>
+              <label className={labelClass}>{t('admin.menu.description')} 🇪🇸</label>
               <textarea
                 value={form.description}
                 onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
                 placeholder={t('admin.menu.descPlaceholder')}
+                rows={2}
+                className={`${inputClass} resize-none`}
+              />
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass}>{t('admin.menu.description')} 🇬🇧 (English)</label>
+              <textarea
+                value={form.description_en}
+                onChange={(e) => setForm((f) => ({ ...f, description_en: e.target.value }))}
+                placeholder="Optional English description — shown when visitor switches to EN"
                 rows={2}
                 className={`${inputClass} resize-none`}
               />
