@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import type { HeroConfig } from '@/types'
 import { Button } from '@/components/ui/Button'
 
@@ -6,6 +7,8 @@ interface HeroProps {
 }
 
 export function Hero({ hero }: HeroProps) {
+  const { t } = useTranslation()
+
   const handleClick = (href: string) => {
     const id = href.replace('#', '')
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -16,7 +19,6 @@ export function Hero({ hero }: HeroProps) {
       id="inicio"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image */}
       {hero.backgroundImage && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -24,18 +26,15 @@ export function Hero({ hero }: HeroProps) {
         />
       )}
 
-      {/* Overlay */}
       <div
         className="absolute inset-0 bg-neutral-900"
         style={{ opacity: hero.overlayOpacity ?? 0.5 }}
       />
 
-      {/* Fallback gradient when no image */}
       {!hero.backgroundImage && (
         <div className="absolute inset-0 bg-gradient-to-br from-primary-900 to-primary-600" />
       )}
 
-      {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
           {hero.headline}
@@ -44,10 +43,7 @@ export function Hero({ hero }: HeroProps) {
           {hero.subheadline}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            size="lg"
-            onClick={() => handleClick(hero.ctaPrimary.href)}
-          >
+          <Button size="lg" onClick={() => handleClick(hero.ctaPrimary.href)}>
             {hero.ctaPrimary.label}
           </Button>
           {hero.ctaSecondary && (
@@ -63,9 +59,8 @@ export function Hero({ hero }: HeroProps) {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50">
-        <span className="font-body text-xs tracking-widest uppercase">Scroll</span>
+        <span className="font-body text-xs tracking-widest uppercase">{t('hero.scroll')}</span>
         <div className="w-px h-8 bg-white/30 animate-pulse" />
       </div>
     </section>
