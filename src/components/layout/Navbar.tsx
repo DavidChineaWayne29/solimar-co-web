@@ -5,13 +5,24 @@ import type { SiteNav } from '@/types'
 import { Button } from '@/components/ui/Button'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 
+// Map each section href to its i18n key
+const NAV_KEY: Record<string, string> = {
+  '#inicio':   'nav.home',
+  '#menu':     'nav.menuLink',
+  '#nosotros': 'nav.about',
+  '#galeria':  'nav.gallery',
+  '#contacto': 'nav.contact',
+  '#reservas': 'nav.reservations',
+  '#tienda':   'nav.shop',
+}
+
 interface NavbarProps {
   nav: SiteNav
   sectionIds: string[]
 }
 
 export function Navbar({ nav, sectionIds }: NavbarProps) {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const activeId = useScrollSpy(sectionIds)
@@ -32,9 +43,7 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
     i18n.changeLanguage(i18n.language.startsWith('en') ? 'es' : 'en')
   }
 
-  const textColor = scrolled
-    ? 'text-neutral-600 hover:text-primary-600'
-    : 'text-white/80 hover:text-white'
+  const isEn = i18n.language.startsWith('en')
 
   return (
     <header
@@ -52,16 +61,10 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
             href="#inicio"
             onClick={() => handleNavClick('#inicio')}
             className={`font-display text-xl font-semibold transition-colors drop-shadow-lg ${
-              scrolled
-                ? 'text-neutral-900 hover:text-primary-600'
-                : 'text-white hover:text-primary-200'
+              scrolled ? 'text-neutral-900 hover:text-primary-600' : 'text-white hover:text-primary-200'
             }`}
           >
-            {nav.logoIsImage ? (
-              <img src={nav.logo} alt="Logo" className="h-10 w-auto" />
-            ) : (
-              nav.logo
-            )}
+            {nav.logoIsImage ? <img src={nav.logo} alt="Logo" className="h-10 w-auto" /> : nav.logo}
           </a>
 
           {/* Desktop nav */}
@@ -69,6 +72,7 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
             {nav.links.map((link) => {
               const id = link.href.replace('#', '')
               const isActive = activeId === id
+              const label = NAV_KEY[link.href] ? t(NAV_KEY[link.href]) : link.label
               return (
                 <button
                   key={link.href}
@@ -79,7 +83,7 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
                       : scrolled ? 'text-neutral-600 hover:text-primary-600' : 'text-white/80 hover:text-white'
                   }`}
                 >
-                  {link.label}
+                  {label}
                 </button>
               )
             })}
@@ -87,41 +91,40 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
             {/* Language toggle */}
             <button
               onClick={toggleLang}
-              className={`flex items-center gap-1 font-body text-sm transition-colors ${textColor}`}
-              aria-label="Switch language"
+              className={`flex items-center gap-1 font-body text-sm transition-colors ${
+                scrolled ? 'text-neutral-600 hover:text-primary-600' : 'text-white/80 hover:text-white'
+              }`}
+              aria-label={t('nav.language')}
             >
-              <Globe size={16} />
-              {i18n.language.startsWith('en') ? 'ES' : 'EN'}
+              <Globe size={15} />
+              {isEn ? 'ES' : 'EN'}
             </button>
 
             {nav.ctaLabel && (
-              <Button
-                size="sm"
-                onClick={() => handleNavClick(nav.ctaHref ?? '#contacto')}
-              >
-                {nav.ctaLabel}
+              <Button size="sm" onClick={() => handleNavClick(nav.ctaHref ?? '#contacto')}>
+                {t('nav.book')}
               </Button>
             )}
           </nav>
 
-          {/* Mobile toggle */}
+          {/* Mobile controls */}
           <div className="lg:hidden flex items-center gap-3">
             <button
               onClick={toggleLang}
               className={`flex items-center gap-1 font-body text-sm transition-colors ${
                 scrolled ? 'text-neutral-600' : 'text-white/80'
               }`}
-              aria-label="Switch language"
+              aria-label={t('nav.language')}
             >
-              <Globe size={16} />
-              {i18n.language.startsWith('en') ? 'ES' : 'EN'}
+              <Globe size={15} />
+              {isEn ? 'ES' : 'EN'}
             </button>
             <button
               onClick={() => setIsOpen((o) => !o)}
               className={`p-2 transition-colors ${
                 scrolled ? 'text-neutral-600 hover:text-primary-600' : 'text-white/80 hover:text-white'
               }`}
-              aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-label={isOpen ? t('nav.closeMenu') : t('nav.openMenu')}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -132,22 +135,25 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
       {/* Mobile menu */}
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-neutral-100 px-4 py-6 flex flex-col gap-4 shadow-lg">
-          {nav.links.map((link) => (
-            <button
-              key={link.href}
-              onClick={() => handleNavClick(link.href)}
-              className="font-body text-left text-neutral-700 hover:text-primary-600 transition-colors py-1"
-            >
-              {link.label}
-            </button>
-          ))}
+          {nav.links.map((link) => {
+            const label = NAV_KEY[link.href] ? t(NAV_KEY[link.href]) : link.label
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className="font-body text-left text-neutral-700 hover:text-primary-600 transition-colors py-1"
+              >
+                {label}
+              </button>
+            )
+          })}
           {nav.ctaLabel && (
             <Button
               size="sm"
               className="self-start mt-2"
               onClick={() => handleNavClick(nav.ctaHref ?? '#contacto')}
             >
-              {nav.ctaLabel}
+              {t('nav.book')}
             </Button>
           )}
         </div>

@@ -16,7 +16,10 @@ export function Gallery({ gallery }: GalleryProps) {
 
   return (
     <SectionWrapper id="galeria" bg="neutral">
-      <SectionHeader title={gallery.title} subtitle={gallery.subtitle} />
+      <SectionHeader
+        title={t('gallery.title', { defaultValue: gallery.title })}
+        subtitle={gallery.subtitle ? t('gallery.subtitle', { defaultValue: gallery.subtitle }) : undefined}
+      />
 
       <div className="columns-2 md:columns-3 gap-4 space-y-4">
         {images.map((img, i) => (

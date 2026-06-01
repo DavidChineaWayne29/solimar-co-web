@@ -14,7 +14,9 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
   return (
     <SectionWrapper id="testimonios" bg="white">
-      <SectionHeader title={testimonials.title ?? t('testimonials.title')} />
+      <SectionHeader
+        title={t('testimonials.title', { defaultValue: testimonials.title ?? '' })}
+      />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {items.map((item) => (
           <div
@@ -32,19 +34,15 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                 ))}
               </div>
             )}
-
             <p className="font-body text-neutral-700 text-sm leading-relaxed mb-6 italic">
               "{item.text}"
             </p>
-
             <div className="flex items-center gap-3">
               {item.avatar ? (
                 <img src={item.avatar} alt={item.author} className="w-10 h-10 rounded-full object-cover" />
               ) : (
                 <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
-                  <span className="font-display text-primary-600 text-sm">
-                    {item.author.charAt(0)}
-                  </span>
+                  <span className="font-display text-primary-600 text-sm">{item.author.charAt(0)}</span>
                 </div>
               )}
               <div>

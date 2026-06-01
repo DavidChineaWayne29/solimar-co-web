@@ -37,14 +37,14 @@ export function Hero({ hero }: HeroProps) {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-          {hero.headline}
+          {t('hero.headline', { defaultValue: hero.headline })}
         </h1>
         <p className="font-body text-lg sm:text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-          {hero.subheadline}
+          {t('hero.subheadline', { defaultValue: hero.subheadline })}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" onClick={() => handleClick(hero.ctaPrimary.href)}>
-            {hero.ctaPrimary.label}
+            {t('hero.ctaPrimary', { defaultValue: hero.ctaPrimary.label })}
           </Button>
           {hero.ctaSecondary && (
             <Button
@@ -53,7 +53,7 @@ export function Hero({ hero }: HeroProps) {
               className="border-white text-white hover:bg-white/10"
               onClick={() => handleClick(hero.ctaSecondary!.href)}
             >
-              {hero.ctaSecondary.label}
+              {t('hero.ctaSecondary', { defaultValue: hero.ctaSecondary.label })}
             </Button>
           )}
         </div>

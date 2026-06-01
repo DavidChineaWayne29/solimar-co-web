@@ -148,6 +148,7 @@ interface CardProps {
 }
 
 function DishCard({ item, onClick }: CardProps) {
+  const { t } = useTranslation()
   const { dietary } = splitItem(item)
 
   return (
@@ -204,7 +205,7 @@ function DishCard({ item, onClick }: CardProps) {
         <div className="flex items-center justify-between mt-3 pt-3 border-t border-neutral-100">
           <span className="font-display text-primary-600 text-lg font-semibold">{item.price}</span>
           <span className="font-body text-xs text-neutral-400 group-hover:text-primary-500 transition-colors">
-            Ver más →
+            {t('menu.seeMore')} →
           </span>
         </div>
       </div>
@@ -221,14 +222,15 @@ interface MenuSectionProps {
 export function MenuSection({ menu }: MenuSectionProps) {
   const { t } = useTranslation()
   const { items } = useMenuData(menu.items)
-  const categories = ['Todos', ...new Set(items.map((i) => i.category))]
-  const [activeCategory, setActiveCategory] = useState('Todos')
+  const categories = [t('menu.all'), ...new Set(items.map((i) => i.category))]
+  const [activeCategory, setActiveCategory] = useState('')
   const [selected, setSelected] = useState<MenuItem | null>(null)
 
-  const filtered =
-    activeCategory === 'Todos'
-      ? items
-      : items.filter((i) => i.category === activeCategory)
+  const allLabel = t('menu.all')
+  const currentCat = activeCategory || allLabel
+  const filtered = currentCat === allLabel
+    ? items
+    : items.filter((i) => i.category === currentCat)
 
   const handleClose = useCallback(() => setSelected(null), [])
 
@@ -244,7 +246,7 @@ export function MenuSection({ menu }: MenuSectionProps) {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={`font-body text-sm px-5 py-2 rounded-full border transition-all duration-200 ${
-                activeCategory === cat
+                currentCat === cat
                   ? 'bg-primary-600 text-white border-primary-600 shadow-sm'
                   : 'bg-white text-neutral-600 border-neutral-200 hover:border-primary-400 hover:text-primary-600'
               }`}
