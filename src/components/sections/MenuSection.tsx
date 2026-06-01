@@ -1,5 +1,7 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import type { MenuConfig } from '@/types'
+import { useMenuData } from '@/hooks/useMenuData'
 import { SectionWrapper, SectionHeader } from '@/components/ui/SectionWrapper'
 
 interface MenuSectionProps {
@@ -7,33 +9,36 @@ interface MenuSectionProps {
 }
 
 export function MenuSection({ menu }: MenuSectionProps) {
-  const categories = [...new Set(menu.items.map((i) => i.category))]
-  const [activeCategory, setActiveCategory] = useState(categories[0] ?? '')
+  const { t } = useTranslation()
+  const { items } = useMenuData(menu.items)
+  const categories = [...new Set(items.map((i) => i.category))]
+  const [activeCategory, setActiveCategory] = useState('')
 
-  const filtered = menu.items.filter((i) => i.category === activeCategory)
+  const currentCategory = activeCategory || categories[0] || ''
+  const filtered = items.filter((i) => i.category === currentCategory)
 
   return (
     <SectionWrapper id="menu" bg="white">
-      <SectionHeader title={menu.title ?? 'Nuestra carta'} />
+      <SectionHeader title={menu.title ?? t('menu.title')} />
 
-      {/* Category tabs */}
-      <div className="flex flex-wrap gap-2 justify-center mb-10">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`font-body text-sm px-5 py-2 rounded-full border transition-colors duration-200 ${
-              activeCategory === cat
-                ? 'bg-primary-600 text-white border-primary-600'
-                : 'bg-white text-neutral-600 border-neutral-200 hover:border-primary-400 hover:text-primary-600'
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+      {categories.length > 0 && (
+        <div className="flex flex-wrap gap-2 justify-center mb-10">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`font-body text-sm px-5 py-2 rounded-full border transition-colors duration-200 ${
+                currentCategory === cat
+                  ? 'bg-primary-600 text-white border-primary-600'
+                  : 'bg-white text-neutral-600 border-neutral-200 hover:border-primary-400 hover:text-primary-600'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      )}
 
-      {/* Menu items grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filtered.map((item) => (
           <div
@@ -58,7 +63,7 @@ export function MenuSection({ menu }: MenuSectionProps) {
                   )}
                   {item.allergens && item.allergens.length > 0 && (
                     <p className="font-body text-xs text-neutral-400 mt-1">
-                      Alérgenos: {item.allergens.join(', ')}
+                      {t('menu.allergens')}: {item.allergens.join(', ')}
                     </p>
                   )}
                 </div>

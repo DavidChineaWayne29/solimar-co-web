@@ -1,46 +1,61 @@
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import type { SiteNav } from "@/types";
-import { Button } from "@/components/ui/Button";
-import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { useState, useEffect } from 'react'
+import { Menu, X, Globe } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import type { SiteNav } from '@/types'
+import { Button } from '@/components/ui/Button'
+import { useScrollSpy } from '@/hooks/useScrollSpy'
 
 interface NavbarProps {
-  nav: SiteNav;
-  sectionIds: string[];
+  nav: SiteNav
+  sectionIds: string[]
 }
 
 export function Navbar({ nav, sectionIds }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const activeId = useScrollSpy(sectionIds);
+  const { i18n } = useTranslation()
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const activeId = useScrollSpy(sectionIds)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    const id = href.replace("#", "");
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+    setIsOpen(false)
+    const id = href.replace('#', '')
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const toggleLang = () => {
+    i18n.changeLanguage(i18n.language.startsWith('en') ? 'es' : 'en')
+  }
+
+  const textColor = scrolled
+    ? 'text-neutral-600 hover:text-primary-600'
+    : 'text-white/80 hover:text-white'
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-sm"
-          : "bg-gradient-to-b from-black/80 to-transparent"
+          ? 'bg-white/95 backdrop-blur-sm shadow-sm'
+          : 'bg-gradient-to-b from-black/80 to-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
+
           {/* Logo */}
           <a
             href="#inicio"
-            onClick={() => handleNavClick("#inicio")}
-            className="font-display text-xl text-neutral-900 hover:text-primary-600 transition-colors"
+            onClick={() => handleNavClick('#inicio')}
+            className={`font-display text-xl font-semibold transition-colors drop-shadow-lg ${
+              scrolled
+                ? 'text-neutral-900 hover:text-primary-600'
+                : 'text-white hover:text-primary-200'
+            }`}
           >
             {nav.logoIsImage ? (
               <img src={nav.logo} alt="Logo" className="h-10 w-auto" />
@@ -52,30 +67,37 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8">
             {nav.links.map((link) => {
-              const id = link.href.replace("#", "");
-              const isActive = activeId === id;
+              const id = link.href.replace('#', '')
+              const isActive = activeId === id
               return (
                 <button
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
                   className={`font-body text-sm transition-colors duration-200 ${
                     isActive
-                      ? scrolled
-                        ? "text-primary-600 font-semibold"
-                        : "text-white font-semibold"
-                      : scrolled
-                        ? "text-neutral-600 hover:text-primary-600"
-                        : "text-white/80 hover:text-white"
+                      ? scrolled ? 'text-primary-600 font-semibold' : 'text-white font-semibold'
+                      : scrolled ? 'text-neutral-600 hover:text-primary-600' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {link.label}
                 </button>
-              );
+              )
             })}
+
+            {/* Language toggle */}
+            <button
+              onClick={toggleLang}
+              className={`flex items-center gap-1 font-body text-sm transition-colors ${textColor}`}
+              aria-label="Switch language"
+            >
+              <Globe size={16} />
+              {i18n.language.startsWith('en') ? 'ES' : 'EN'}
+            </button>
+
             {nav.ctaLabel && (
               <Button
                 size="sm"
-                onClick={() => handleNavClick(nav.ctaHref ?? "#contacto")}
+                onClick={() => handleNavClick(nav.ctaHref ?? '#contacto')}
               >
                 {nav.ctaLabel}
               </Button>
@@ -83,13 +105,27 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
           </nav>
 
           {/* Mobile toggle */}
-          <button
-            onClick={() => setIsOpen((o) => !o)}
-            className="lg:hidden p-2 text-neutral-600 hover:text-primary-600 transition-colors"
-            aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-3">
+            <button
+              onClick={toggleLang}
+              className={`flex items-center gap-1 font-body text-sm transition-colors ${
+                scrolled ? 'text-neutral-600' : 'text-white/80'
+              }`}
+              aria-label="Switch language"
+            >
+              <Globe size={16} />
+              {i18n.language.startsWith('en') ? 'ES' : 'EN'}
+            </button>
+            <button
+              onClick={() => setIsOpen((o) => !o)}
+              className={`p-2 transition-colors ${
+                scrolled ? 'text-neutral-600 hover:text-primary-600' : 'text-white/80 hover:text-white'
+              }`}
+              aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -109,7 +145,7 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
             <Button
               size="sm"
               className="self-start mt-2"
-              onClick={() => handleNavClick(nav.ctaHref ?? "#contacto")}
+              onClick={() => handleNavClick(nav.ctaHref ?? '#contacto')}
             >
               {nav.ctaLabel}
             </Button>
@@ -117,5 +153,5 @@ export function Navbar({ nav, sectionIds }: NavbarProps) {
         </div>
       )}
     </header>
-  );
+  )
 }

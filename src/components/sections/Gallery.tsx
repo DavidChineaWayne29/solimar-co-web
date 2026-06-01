@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { X } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import type { GalleryConfig } from '@/types'
+import { useGalleryData } from '@/hooks/useGalleryData'
 import { SectionWrapper, SectionHeader } from '@/components/ui/SectionWrapper'
 
 interface GalleryProps {
@@ -8,6 +10,8 @@ interface GalleryProps {
 }
 
 export function Gallery({ gallery }: GalleryProps) {
+  const { t } = useTranslation()
+  const { images } = useGalleryData(gallery.images)
   const [lightbox, setLightbox] = useState<number | null>(null)
 
   return (
@@ -15,7 +19,7 @@ export function Gallery({ gallery }: GalleryProps) {
       <SectionHeader title={gallery.title} subtitle={gallery.subtitle} />
 
       <div className="columns-2 md:columns-3 gap-4 space-y-4">
-        {gallery.images.map((img, i) => (
+        {images.map((img, i) => (
           <button
             key={img.src}
             onClick={() => setLightbox(i)}
@@ -31,7 +35,6 @@ export function Gallery({ gallery }: GalleryProps) {
         ))}
       </div>
 
-      {/* Lightbox */}
       {lightbox !== null && (
         <div
           className="fixed inset-0 z-50 bg-neutral-900/90 flex items-center justify-center p-4"
@@ -40,19 +43,19 @@ export function Gallery({ gallery }: GalleryProps) {
           <button
             onClick={() => setLightbox(null)}
             className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors"
-            aria-label="Cerrar"
+            aria-label={t('gallery.close')}
           >
             <X size={32} />
           </button>
           <img
-            src={gallery.images[lightbox].src}
-            alt={gallery.images[lightbox].alt}
+            src={images[lightbox].src}
+            alt={images[lightbox].alt}
             className="max-w-full max-h-[90vh] object-contain rounded-brand"
             onClick={(e) => e.stopPropagation()}
           />
-          {gallery.images[lightbox].caption && (
+          {images[lightbox].caption && (
             <p className="absolute bottom-8 text-white/70 font-body text-sm">
-              {gallery.images[lightbox].caption}
+              {images[lightbox].caption}
             </p>
           )}
         </div>
