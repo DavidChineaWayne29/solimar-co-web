@@ -64,7 +64,7 @@ const PORTFOLIO = [
     name: 'El Rincón Canario',
     sector: 'Restaurante',
     desc: 'Menú digital con alérgenos, reservas online, galería y panel de gestión propio.',
-    url: 'https://web-templates-rouge.vercel.app',
+    url: 'https://restaurante-rincon-canario.vercel.app/',
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80',
     badge_color: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
     live: true,
