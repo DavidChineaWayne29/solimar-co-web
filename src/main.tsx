@@ -16,7 +16,7 @@ if (!root) throw new Error('No se encontró el elemento #root en index.html')
 createRoot(root).render(
   <StrictMode>
     <BrowserRouter>
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="min-h-screen bg-neutral-50" />}>
         <Routes>
           <Route path="/admin/*" element={<AdminPage />} />
           <Route path="/*" element={<App config={siteConfig} />} />
