@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { supabase } from '@/lib/supabase'
 
 interface FormFields {
   name: string
@@ -19,14 +20,9 @@ const initialFields: FormFields = {
   name: '', email: '', phone: '', message: '',
 }
 
-/**
- * Gestiona el estado y envío del formulario de contacto.
- * El envío usa fetch a Formspree por defecto — cambia el endpoint a tu gusto.
- * Sin dependencias externas más allá de React.
- */
-export function useContactForm(endpoint?: string): UseContactFormReturn {
-  const [fields, setFields]   = useState<FormFields>(initialFields)
-  const [status, setStatus]   = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+export function useContactForm(): UseContactFormReturn {
+  const [fields, setFields] = useState<FormFields>(initialFields)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -34,21 +30,18 @@ export function useContactForm(endpoint?: string): UseContactFormReturn {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!endpoint) {
-      // Sin endpoint configurado: simula éxito en demo
-      setStatus('sending')
-      await new Promise((r) => setTimeout(r, 1200))
-      setStatus('success')
-      return
-    }
+    setStatus('sending')
     try {
-      setStatus('sending')
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(fields),
-      })
-      setStatus(res.ok ? 'success' : 'error')
+      const { error } = await supabase.from('contact_messages').insert([{
+        name: fields.name,
+        email: fields.email,
+        phone: fields.phone || null,
+        message: fields.message,
+        read: false,
+      }])
+      if (error) throw error
+      setStatus('success')
+      setFields(initialFields)
     } catch {
       setStatus('error')
     }

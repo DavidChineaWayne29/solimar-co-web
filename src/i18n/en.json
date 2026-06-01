@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "navigation": "Navigation"
+  },
+  "hero": {
+    "scroll": "Scroll"
+  },
+  "menu": {
+    "title": "Our menu",
+    "allergens": "Allergens"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "close": "Close"
+  },
+  "testimonials": {
+    "title": "What our customers say"
+  },
+  "reservation": {
+    "title": "Book your table",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "date": "Date",
+    "time": "Time",
+    "guests": "Guests",
+    "notes": "Notes or special requests",
+    "notesPlaceholder": "Allergies, celebrations, baby chair...",
+    "submit": "Confirm reservation",
+    "sending": "Sending...",
+    "selectTime": "Select time",
+    "person": "person",
+    "people": "people",
+    "moreGuests": "More than 10 (groups)",
+    "successTitle": "Reservation received!",
+    "successText": "We'll confirm by email or phone within 2 hours.",
+    "another": "Make another reservation",
+    "namePlaceholder": "Your name",
+    "phonePlaceholder": "+34 600 000 000",
+    "emailPlaceholder": "you@email.com",
+    "required": " *",
+    "bookingSystem": "Booking system"
+  },
+  "contact": {
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "whatsapp": "Message us on WhatsApp",
+    "mapTitle": "Location map",
+    "name": "Name",
+    "message": "Message",
+    "submit": "Send message",
+    "sending": "Sending...",
+    "error": "Failed to send. Please try again.",
+    "successTitle": "Message sent!",
+    "successText": "We'll get back to you as soon as possible.",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@email.com",
+    "messagePlaceholder": "How can we help you?",
+    "required": " *"
+  },
+  "footer": {
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "allRights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error loading data",
+    "language": "Language"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "loginTitle": "Admin login",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "loginError": "Invalid email or password",
+    "tabs": {
+      "menu": "Menu",
+      "reservations": "Reservations",
+      "messages": "Messages"
+    },
+    "menu": {
+      "category": "Category",
+      "name": "Name",
+      "description": "Description",
+      "price": "Price",
+      "allergens": "Allergens (comma separated)",
+      "addItem": "Add dish",
+      "editItem": "Edit dish",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "confirmDelete": "Delete this dish?",
+      "noItems": "No dishes in menu",
+      "namePlaceholder": "Dish name",
+      "descPlaceholder": "Optional description",
+      "pricePlaceholder": "e.g. 12.50 €",
+      "categoryPlaceholder": "e.g. Starters",
+      "allergensPlaceholder": "e.g. gluten, dairy"
+    },
+    "reservations": {
+      "date": "Date",
+      "time": "Time",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "guests": "Guests",
+      "notes": "Notes",
+      "status": "Status",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "noData": "No reservations"
+    },
+    "messages": {
+      "from": "From",
+      "email": "Email",
+      "message": "Message",
+      "date": "Date",
+      "read": "Read",
+      "unread": "Unread",
+      "markRead": "Mark as read",
+      "noData": "No messages"
+    }
+  }
+}
