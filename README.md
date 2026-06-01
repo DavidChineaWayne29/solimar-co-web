@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Web Templates — Sistema de webs para negocios locales
 
 Sistema de templates React + Vite + Tailwind para crear webs profesionales para negocios locales de forma rápida y escalable.
@@ -60,3 +61,7 @@ vercel --prod
 ```
 
 Cada cliente tiene su propio proyecto en Vercel con su dominio personalizado.
+=======
+# web-templates
+Templates
+>>>>>>> cb57c0bfa40f199a9fac83cc159fb492d386e8da
