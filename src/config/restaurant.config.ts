@@ -69,8 +69,8 @@ export const siteConfig: SiteConfig = {
     subheadline: 'Cocina tradicional elaborada con productos locales de temporada. Abierto desde 1987 en el corazón de Santa Cruz.',
     ctaPrimary:   { label: 'Reservar mesa',  href: '#reservas' },
     ctaSecondary: { label: 'Ver el menú',    href: '#menu' },
-    backgroundImage:  '/images/hero-restaurant.jpg',
-    overlayOpacity:   0.55,
+    backgroundImage: '/images/hero.jpg',
+    overlayOpacity: 0.65,
   },
 
   // ─── Servicios / Propuesta de valor ───────────────────────────────────────
