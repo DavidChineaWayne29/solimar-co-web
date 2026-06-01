@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { supabase } from '@/lib/supabase'
-import { Pencil, Trash2, Plus, X, Check, Leaf, ChevronDown, ChevronUp, Tag } from 'lucide-react'
+import { Pencil, Trash2, Plus, X, Check, Leaf, ChevronDown, ChevronUp, Tag, Languages, Loader2 } from 'lucide-react'
 
 interface MenuItem {
   id: string
@@ -40,12 +40,42 @@ export function MenuManager() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveError, setSaveError] = useState('')
+  const [translating, setTranslating] = useState(false)
+  const [autoTranslated, setAutoTranslated] = useState(false)
 
   // Category management state
   const [showCatPanel, setShowCatPanel] = useState(false)
   const [newCatName, setNewCatName] = useState('')
   const [catSaving, setCatSaving] = useState(false)
   const [catError, setCatError] = useState('')
+
+  // Auto-translate description ES → EN with 900ms debounce
+  useEffect(() => {
+    if (!editing) return
+    const text = form.description.trim()
+    if (!text) {
+      setAutoTranslated(false)
+      return
+    }
+    const timer = setTimeout(async () => {
+      setTranslating(true)
+      try {
+        const res = await fetch(
+          `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=es|en`
+        )
+        const data = await res.json()
+        if (data.responseStatus === 200 && data.responseData?.translatedText) {
+          setForm((f) => ({ ...f, description_en: data.responseData.translatedText }))
+          setAutoTranslated(true)
+        }
+      } catch {
+        // silently ignore network errors
+      } finally {
+        setTranslating(false)
+      }
+    }, 900)
+    return () => clearTimeout(timer)
+  }, [form.description, editing])
 
   const fetchData = async () => {
     const [{ data: cats, error: catErr }, { data: menuItems, error: itemErr }] =
@@ -113,12 +143,14 @@ export function MenuManager() {
 
   const openAdd = () => {
     setSaveError('')
+    setAutoTranslated(false)
     setForm({ ...emptyForm, category_id: categories[0]?.id ?? '' })
     setEditing(true)
   }
 
   const openEdit = (item: MenuItem) => {
     setSaveError('')
+    setAutoTranslated(false)
     setForm({
       id: item.id,
       name: item.name,
@@ -328,25 +360,50 @@ export function MenuManager() {
                 className={inputClass}
               />
             </div>
-            <div className="sm:col-span-2">
-              <label className={labelClass}>{t('admin.menu.description')} 🇪🇸</label>
-              <textarea
-                value={form.description}
-                onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
-                placeholder={t('admin.menu.descPlaceholder')}
-                rows={2}
-                className={`${inputClass} resize-none`}
-              />
-            </div>
-            <div className="sm:col-span-2">
-              <label className={labelClass}>{t('admin.menu.description')} 🇬🇧 (English)</label>
-              <textarea
-                value={form.description_en}
-                onChange={(e) => setForm((f) => ({ ...f, description_en: e.target.value }))}
-                placeholder="Optional English description — shown when visitor switches to EN"
-                rows={2}
-                className={`${inputClass} resize-none`}
-              />
+            {/* Descriptions side by side */}
+            <div className="sm:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>
+                  🇪🇸 {t('admin.menu.description')}
+                </label>
+                <textarea
+                  value={form.description}
+                  onChange={(e) => {
+                    setAutoTranslated(false)
+                    setForm((f) => ({ ...f, description: e.target.value }))
+                  }}
+                  placeholder={t('admin.menu.descPlaceholder')}
+                  rows={3}
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
+              <div>
+                <label className={`${labelClass} flex items-center justify-between`}>
+                  <span>🇬🇧 Description (EN)</span>
+                  {translating && (
+                    <span className="flex items-center gap-1 text-primary-500 text-xs font-normal">
+                      <Loader2 size={11} className="animate-spin" />
+                      Traduciendo...
+                    </span>
+                  )}
+                  {!translating && autoTranslated && (
+                    <span className="flex items-center gap-1 text-green-600 text-xs font-normal">
+                      <Languages size={11} />
+                      Auto-traducido
+                    </span>
+                  )}
+                </label>
+                <textarea
+                  value={form.description_en}
+                  onChange={(e) => {
+                    setAutoTranslated(false)
+                    setForm((f) => ({ ...f, description_en: e.target.value }))
+                  }}
+                  placeholder="Se rellena automáticamente al escribir en español..."
+                  rows={3}
+                  className={`${inputClass} resize-none ${translating ? 'opacity-60' : ''}`}
+                />
+              </div>
             </div>
             <div className="sm:col-span-2">
               <label className={labelClass}>URL de imagen (opcional)</label>
