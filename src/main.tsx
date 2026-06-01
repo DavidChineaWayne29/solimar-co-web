@@ -19,7 +19,7 @@ import { App } from './App'
  * O usa la variable de entorno VITE_SITE_CONFIG para cargarlo dinámicamente
  * según el entorno de Vercel (un proyecto Vercel por cliente).
  */
-import { siteConfig } from './config/base.config'
+import { siteConfig } from './config/restaurant.config'
 
 const AdminPage = lazy(() =>
   import('./pages/AdminPage').then((m) => ({ default: m.AdminPage }))
