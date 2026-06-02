@@ -73,10 +73,10 @@ const PORTFOLIO = [
     name: 'Boutique María',
     sector: 'Moda & Retail',
     desc: 'Catálogo de productos con tienda integrada y pedidos por WhatsApp.',
-    url: '#',
+    url: 'https://boutique-maria.vercel.app/',
     img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
     badge_color: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
-    live: false,
+    live: true,
   },
   {
     name: 'Clínica Estética Sol',
