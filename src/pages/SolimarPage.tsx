@@ -327,7 +327,8 @@ function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PORTFOLIO.map((p) => (
-            <div key={p.name} className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group hover:border-slate-500 transition-colors">
+            <a key={p.name} href={p.live ? p.url : undefined} target={p.live ? '_blank' : undefined} rel="noopener noreferrer"
+              className={`bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group transition-all block ${p.live ? 'hover:border-slate-500 hover:shadow-xl hover:shadow-black/30 hover:-translate-y-1 cursor-pointer' : 'cursor-default'}`}>
               <div className="relative h-48 overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -360,7 +361,7 @@ function Portfolio() {
                   </span>
                 )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
