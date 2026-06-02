@@ -507,10 +507,39 @@ function Testimonials() {
 function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', sector: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
+    setSending(true)
+    setError('')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '85f32425-d389-4407-9a5c-284fc31d8c34',
+          subject: `Nueva solicitud de ${fields.name} — Solimar&Co.`,
+          from_name: 'Solimar&Co. Web',
+          name: fields.name,
+          email: fields.email,
+          phone: fields.phone || '—',
+          sector: fields.sector || '—',
+          message: fields.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setError('Error al enviar. Inténtalo de nuevo o escríbenos por WhatsApp.')
+      }
+    } catch {
+      setError('Error de red. Inténtalo de nuevo.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const inputClass = 'w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors'
@@ -614,10 +643,12 @@ function Contact() {
                     required rows={3} placeholder="Cuéntanos tu negocio y qué esperas de tu web..."
                     className={`${inputClass} resize-none`} />
                 </div>
-                <button type="submit"
-                  className="w-full bg-sky-500 hover:bg-sky-400 text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                  Enviar solicitud
-                  <ArrowRight size={16} />
+                {error && (
+                  <p className="text-red-400 text-xs text-center bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2">{error}</p>
+                )}
+                <button type="submit" disabled={sending}
+                  className="w-full bg-sky-500 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  {sending ? 'Enviando...' : <><span>Enviar solicitud</span><ArrowRight size={16} /></>}
                 </button>
                 <p className="text-slate-600 text-xs text-center">Respuesta garantizada en menos de 24h</p>
               </form>
