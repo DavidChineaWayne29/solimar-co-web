@@ -79,13 +79,13 @@ const PORTFOLIO = [
     live: true,
   },
   {
-    name: 'Clínica Estética Sol',
+    name: 'Centro Estético Altamira',
     sector: 'Salud & Belleza',
-    desc: 'Citas online 24h, servicios, equipo y galería de resultados.',
-    url: '#',
-    img: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
+    desc: 'Citas online 24h, gestión de tratamientos, horarios y panel de administración completo.',
+    url: 'https://centro-estetico-altamira.vercel.app/',
+    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
     badge_color: 'bg-violet-500 text-white border-violet-600',
-    live: false,
+    live: true,
   },
 ]
 
