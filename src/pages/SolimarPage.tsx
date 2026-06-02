@@ -66,7 +66,7 @@ const PORTFOLIO = [
     desc: 'Menú digital con alérgenos, reservas online, galería y panel de gestión propio.',
     url: 'https://restaurante-rincon-canario.vercel.app/',
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+    badge_color: 'bg-orange-500 text-white border-orange-600',
     live: true,
   },
   {
@@ -74,8 +74,8 @@ const PORTFOLIO = [
     sector: 'Moda & Retail',
     desc: 'Catálogo de productos con tienda integrada y pedidos por WhatsApp.',
     url: 'https://boutique-maria.vercel.app/',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
+    img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80',
+    badge_color: 'bg-pink-500 text-white border-pink-600',
     live: true,
   },
   {
@@ -84,7 +84,7 @@ const PORTFOLIO = [
     desc: 'Citas online 24h, servicios, equipo y galería de resultados.',
     url: '#',
     img: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
+    badge_color: 'bg-violet-500 text-white border-violet-600',
     live: false,
   },
 ]
