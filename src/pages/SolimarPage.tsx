@@ -506,14 +506,29 @@ function Testimonials() {
 
 function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', sector: '', message: '' })
+  const [via, setVia] = useState<'email' | 'whatsapp'>('email')
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSending(true)
     setError('')
+
+    if (via === 'whatsapp') {
+      const msg = encodeURIComponent(
+        `Hola, me interesa vuestra web para mi negocio.\n\n` +
+        `👤 Nombre: ${fields.name}\n` +
+        `🏪 Sector: ${fields.sector || 'No especificado'}\n` +
+        `📞 Teléfono: ${fields.phone}\n\n` +
+        `💬 ${fields.message}`
+      )
+      window.open(`https://wa.me/34618542063?text=${msg}`, '_blank')
+      setSent(true)
+      return
+    }
+
+    setSending(true)
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -610,6 +625,27 @@ function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+
+                {/* Toggle Email / WhatsApp */}
+                <div>
+                  <p className="text-slate-400 text-xs mb-2">¿Cómo prefieres que te contactemos?</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['email', 'whatsapp'] as const).map((opt) => (
+                      <button key={opt} type="button" onClick={() => setVia(opt)}
+                        className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
+                          via === opt
+                            ? opt === 'whatsapp'
+                              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400'
+                              : 'bg-sky-500/15 border-sky-500 text-sky-400'
+                            : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                        }`}>
+                        {opt === 'whatsapp' ? <MessageCircle size={15} /> : <Mail size={15} />}
+                        {opt === 'whatsapp' ? 'WhatsApp' : 'Email'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-slate-400 text-xs block mb-1.5">Nombre *</label>
@@ -617,16 +653,20 @@ function Contact() {
                       required placeholder="Tu nombre" className={inputClass} />
                   </div>
                   <div>
-                    <label className="text-slate-400 text-xs block mb-1.5">Teléfono</label>
+                    <label className="text-slate-400 text-xs block mb-1.5">
+                      Teléfono {via === 'whatsapp' ? '*' : ''}
+                    </label>
                     <input value={fields.phone} onChange={e => setFields(f => ({ ...f, phone: e.target.value }))}
-                      placeholder="+34 600 000 000" className={inputClass} />
+                      required={via === 'whatsapp'} placeholder="+34 600 000 000" className={inputClass} />
                   </div>
                 </div>
+                {via === 'email' && (
                 <div>
                   <label className="text-slate-400 text-xs block mb-1.5">Email *</label>
                   <input type="email" value={fields.email} onChange={e => setFields(f => ({ ...f, email: e.target.value }))}
                     required placeholder="tu@email.com" className={inputClass} />
                 </div>
+                )}
                 <div>
                   <label className="text-slate-400 text-xs block mb-1.5">Sector de tu negocio</label>
                   <select value={fields.sector} onChange={e => setFields(f => ({ ...f, sector: e.target.value }))}
@@ -647,10 +687,17 @@ function Contact() {
                   <p className="text-red-400 text-xs text-center bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2">{error}</p>
                 )}
                 <button type="submit" disabled={sending}
-                  className="w-full bg-sky-500 hover:bg-sky-400 disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                  {sending ? 'Enviando...' : <><span>Enviar solicitud</span><ArrowRight size={16} /></>}
+                  className={`w-full disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
+                    via === 'whatsapp' ? 'bg-emerald-500 hover:bg-emerald-400' : 'bg-sky-500 hover:bg-sky-400'
+                  }`}>
+                  {sending ? 'Enviando...' : via === 'whatsapp'
+                    ? <><MessageCircle size={16} /><span>Abrir WhatsApp</span></>
+                    : <><span>Enviar por email</span><ArrowRight size={16} /></>
+                  }
                 </button>
-                <p className="text-slate-600 text-xs text-center">Respuesta garantizada en menos de 24h</p>
+                <p className="text-slate-600 text-xs text-center">
+                  {via === 'whatsapp' ? 'Se abrirá WhatsApp con el mensaje listo para enviar' : 'Respuesta garantizada en menos de 24h'}
+                </p>
               </form>
             )}
           </div>
