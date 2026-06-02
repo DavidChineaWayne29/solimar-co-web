@@ -189,7 +189,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur border-b border-slate-800' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         <span className="font-bold text-xl text-white tracking-tight">
-          Solimar<span className="text-sky-400">&</span>Co
+          Solimar<span className="text-sky-400">&</span>Co.
         </span>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -318,10 +318,14 @@ function Portfolio() {
     <section id="proyectos" className="py-24 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Proyectos reales</p>
+          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Portfolio</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ve el resultado antes de decidir</h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Demos en vivo de webs que hemos creado. Entra, navega y comprueba la calidad tú mismo.
+            Proyectos de demostración creados para mostrar las posibilidades de cada sector. Entra, navega y comprueba la calidad tú mismo.
+          </p>
+          <p className="inline-flex items-center gap-2 mt-4 text-xs text-slate-500 bg-slate-800 border border-slate-700 px-4 py-2 rounded-full">
+            <span className="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
+            Estos son proyectos de ejemplo — no representan negocios reales
           </p>
         </div>
 
@@ -529,8 +533,8 @@ function Contact() {
 
             <div className="space-y-6">
               {[
-                { icon: MessageCircle, label: 'WhatsApp', value: '+34 600 000 000', href: 'https://wa.me/34600000000' },
-                { icon: Mail, label: 'Email', value: 'hola@solimarco.com', href: 'mailto:hola@solimarco.com' },
+                { icon: MessageCircle, label: 'WhatsApp', value: '+34 618 542 063', href: 'https://wa.me/34618542063' },
+                { icon: Mail, label: 'Email', value: 'solimarcoweb@gmail.com', href: 'mailto:solimarcoweb@gmail.com' },
                 { icon: MapPin, label: 'Ubicación', value: 'Tenerife, Canarias', href: null },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
@@ -630,7 +634,7 @@ function Footer() {
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <span className="font-bold text-white text-lg">
-          Solimar<span className="text-sky-400">&</span>Co
+          Solimar<span className="text-sky-400">&</span>Co.
         </span>
         <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
         <div className="flex gap-6">
