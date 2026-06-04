@@ -329,10 +329,10 @@ function Portfolio() {
     <section id="proyectos" className="py-24 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Proyectos reales</p>
+          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Demos para clientes</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ve el resultado antes de decidir</h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Demos en vivo de webs que hemos creado. Entra, navega y comprueba la calidad tú mismo.
+            Estas son demos funcionales desarrolladas para mostrar a potenciales clientes. Entra, navega y comprueba la calidad tú mismo antes de dar el paso.
           </p>
         </div>
 
@@ -541,7 +541,8 @@ function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '85f32425-d389-4407-9a5c-284fc31d8c34',
+          access_key: '55b45210-546b-47cd-891b-6e6ed3c6de23',
+          to: 'solimarcoweb@gmail.com',
           subject: `Nueva solicitud de ${fields.name} — Solimar&Co.`,
           from_name: 'Solimar&Co. Web',
           name: fields.name,
@@ -627,7 +628,11 @@ function Contact() {
                   <Check size={28} className="text-emerald-400" />
                 </div>
                 <h3 className="text-white font-bold text-xl mb-2">¡Mensaje recibido!</h3>
-                <p className="text-slate-400">Te respondemos en menos de 24h con tu propuesta.</p>
+                <p className="text-slate-400 mb-6">Te respondemos en menos de 24h con tu propuesta.</p>
+                <button onClick={() => { setSent(false); setFields({ name: '', email: '', phone: '', sector: '', message: '' }) }}
+                  className="text-sm text-sky-400 hover:text-sky-300 transition-colors border border-sky-500/30 hover:border-sky-400/50 px-4 py-2 rounded-lg">
+                  Enviar otro mensaje
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
