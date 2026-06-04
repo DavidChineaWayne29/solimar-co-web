@@ -77,9 +77,9 @@ const PORTFOLIO = [
     name: 'El Rincón Canario',
     sector: 'Restaurante',
     desc: 'Menú digital con alérgenos, reservas online, galería y panel de gestión propio.',
-    url: 'https://web-templates-rouge.vercel.app',
+    url: 'https://restaurante-rincon-canario.vercel.app/',
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+    badge_color: 'bg-orange-500 text-white border-orange-600',
     live: true,
   },
   {
@@ -87,18 +87,18 @@ const PORTFOLIO = [
     sector: 'Moda & Retail',
     desc: 'Catálogo de productos con tienda integrada y pedidos por WhatsApp.',
     url: 'https://boutique-maria.vercel.app/',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
+    img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80',
+    badge_color: 'bg-pink-500 text-white border-pink-600',
     live: true,
   },
   {
-    name: 'Clínica Estética Sol',
+    name: 'Centro Estético Altamira',
     sector: 'Salud & Belleza',
-    desc: 'Citas online 24h, servicios, equipo y galería de resultados.',
-    url: '#',
-    img: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
-    live: false,
+    desc: 'Citas online 24h, gestión de tratamientos, horarios y panel de administración completo.',
+    url: 'https://centro-estetico-altamira.vercel.app/',
+    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
+    badge_color: 'bg-violet-500 text-white border-violet-600',
+    live: true,
   },
 ]
 
@@ -201,7 +201,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur border-b border-slate-800' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <Logo className="h-11 w-auto" />
+        <Logo className="h-9 w-auto" />
 
         <nav className="hidden md:flex items-center gap-8">
           {[['sectores','Sectores'],['proyectos','Proyectos'],['planes','Planes'],['contacto','Contacto']].map(([id, label]) => (
@@ -338,7 +338,8 @@ function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PORTFOLIO.map((p) => (
-            <div key={p.name} className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group hover:border-slate-500 transition-colors">
+            <a key={p.name} href={p.live ? p.url : undefined} target={p.live ? '_blank' : undefined} rel="noopener noreferrer"
+              className={`bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group hover:border-slate-500 transition-colors block ${p.live ? 'cursor-pointer' : 'cursor-default'}`}>
               <div className="relative h-48 overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -359,11 +360,10 @@ function Portfolio() {
                 <p className="text-slate-400 text-sm leading-relaxed mb-4">{p.desc}</p>
 
                 {p.live ? (
-                  <a href={p.url} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors group/link">
+                  <span className="inline-flex items-center gap-2 text-sky-400 group-hover:text-sky-300 text-sm font-medium transition-colors">
                     Ver demo en vivo
-                    <ExternalLink size={14} className="group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </a>
+                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
                 ) : (
                   <span className="inline-flex items-center gap-2 text-slate-600 text-sm">
                     <Clock size={14} />
@@ -371,7 +371,7 @@ function Portfolio() {
                   </span>
                 )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -440,12 +440,11 @@ function Pricing({ onContact }: { onContact: () => void }) {
               <h3 className={`text-lg font-bold mb-1 ${plan.highlight ? 'text-sky-400' : 'text-white'}`}>{plan.name}</h3>
               <p className="text-slate-400 text-sm mb-5">{plan.desc}</p>
 
-              <p className="text-xs font-semibold uppercase tracking-widest text-sky-400/80 mb-1">Único pago</p>
-              <div className="flex items-end gap-1 mb-1">
+              <p className="text-xs font-semibold uppercase tracking-widest text-sky-400/80 mb-2">Único pago</p>
+              <div className="flex items-baseline gap-2 flex-wrap mb-1">
                 <span className="text-4xl font-bold text-white">{plan.price}€</span>
-                <span className="text-slate-400 text-sm mb-1.5">desarrollo</span>
+                <span className="text-slate-400 text-sm">desarrollo + IGIC</span>
               </div>
-              <p className="text-slate-500 text-xs mb-1">+ IGIC</p>
               <p className="text-slate-400 text-sm mb-6">+ {plan.monthly}€/mes mantenimiento + IGIC</p>
 
               <ul className="space-y-3 mb-7">
@@ -514,11 +513,55 @@ function Testimonials() {
 
 function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', sector: '', message: '' })
+  const [via, setVia] = useState<'email' | 'whatsapp'>('email')
   const [sent, setSent] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
+    setError('')
+
+    if (via === 'whatsapp') {
+      const msg = encodeURIComponent(
+        `Hola, me interesa vuestra web para mi negocio.\n\n` +
+        `👤 Nombre: ${fields.name}\n` +
+        `🏪 Sector: ${fields.sector || 'No especificado'}\n` +
+        `📞 Teléfono: ${fields.phone}\n\n` +
+        `💬 ${fields.message}`
+      )
+      window.open(`https://wa.me/34618542063?text=${msg}`, '_blank')
+      setSent(true)
+      return
+    }
+
+    setSending(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '85f32425-d389-4407-9a5c-284fc31d8c34',
+          subject: `Nueva solicitud de ${fields.name} — Solimar&Co.`,
+          from_name: 'Solimar&Co. Web',
+          name: fields.name,
+          email: fields.email,
+          phone: fields.phone || '—',
+          sector: fields.sector || '—',
+          message: fields.message,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setSent(true)
+      } else {
+        setError('Error al enviar. Inténtalo de nuevo o escríbenos por WhatsApp.')
+      }
+    } catch {
+      setError('Error de red. Inténtalo de nuevo.')
+    } finally {
+      setSending(false)
+    }
   }
 
   const inputClass = 'w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors'
@@ -541,8 +584,8 @@ function Contact() {
 
             <div className="space-y-6">
               {[
-                { icon: MessageCircle, label: 'WhatsApp', value: '+34 600 000 000', href: 'https://wa.me/34600000000' },
-                { icon: Mail, label: 'Email', value: 'hola@solimarco.com', href: 'mailto:hola@solimarco.com' },
+                { icon: MessageCircle, label: 'WhatsApp', value: '+34 618 542 063', href: 'https://wa.me/34618542063' },
+                { icon: Mail, label: 'Email', value: 'solimarcoweb@gmail.com', href: 'mailto:solimarcoweb@gmail.com' },
                 { icon: MapPin, label: 'Ubicación', value: 'Tenerife, Canarias', href: null },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
@@ -561,7 +604,6 @@ function Contact() {
               ))}
             </div>
 
-            {/* Trust badges */}
             <div className="grid grid-cols-3 gap-4 mt-12">
               {[
                 { icon: Zap, label: 'Entrega rápida', sub: '5-10 días' },
@@ -589,6 +631,25 @@ function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <p className="text-slate-400 text-xs mb-2">¿Cómo prefieres que te contactemos?</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['email', 'whatsapp'] as const).map((opt) => (
+                      <button key={opt} type="button" onClick={() => setVia(opt)}
+                        className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
+                          via === opt
+                            ? opt === 'whatsapp'
+                              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400'
+                              : 'bg-sky-500/15 border-sky-500 text-sky-400'
+                            : 'border-slate-600 text-slate-400 hover:border-slate-500'
+                        }`}>
+                        {opt === 'whatsapp' ? <MessageCircle size={15} /> : <Mail size={15} />}
+                        {opt === 'whatsapp' ? 'WhatsApp' : 'Email'}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-slate-400 text-xs block mb-1.5">Nombre *</label>
@@ -596,16 +657,18 @@ function Contact() {
                       required placeholder="Tu nombre" className={inputClass} />
                   </div>
                   <div>
-                    <label className="text-slate-400 text-xs block mb-1.5">Teléfono</label>
+                    <label className="text-slate-400 text-xs block mb-1.5">Teléfono {via === 'whatsapp' ? '*' : ''}</label>
                     <input value={fields.phone} onChange={e => setFields(f => ({ ...f, phone: e.target.value }))}
-                      placeholder="+34 600 000 000" className={inputClass} />
+                      required={via === 'whatsapp'} placeholder="+34 600 000 000" className={inputClass} />
                   </div>
                 </div>
-                <div>
-                  <label className="text-slate-400 text-xs block mb-1.5">Email *</label>
-                  <input type="email" value={fields.email} onChange={e => setFields(f => ({ ...f, email: e.target.value }))}
-                    required placeholder="tu@email.com" className={inputClass} />
-                </div>
+                {via === 'email' && (
+                  <div>
+                    <label className="text-slate-400 text-xs block mb-1.5">Email *</label>
+                    <input type="email" value={fields.email} onChange={e => setFields(f => ({ ...f, email: e.target.value }))}
+                      required placeholder="tu@email.com" className={inputClass} />
+                  </div>
+                )}
                 <div>
                   <label className="text-slate-400 text-xs block mb-1.5">Sector de tu negocio</label>
                   <select value={fields.sector} onChange={e => setFields(f => ({ ...f, sector: e.target.value }))}
@@ -622,12 +685,21 @@ function Contact() {
                     required rows={3} placeholder="Cuéntanos tu negocio y qué esperas de tu web..."
                     className={`${inputClass} resize-none`} />
                 </div>
-                <button type="submit"
-                  className="w-full bg-sky-500 hover:bg-sky-400 text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
-                  Enviar solicitud
-                  <ArrowRight size={16} />
+                {error && (
+                  <p className="text-red-400 text-xs text-center bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2">{error}</p>
+                )}
+                <button type="submit" disabled={sending}
+                  className={`w-full disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
+                    via === 'whatsapp' ? 'bg-emerald-500 hover:bg-emerald-400' : 'bg-sky-500 hover:bg-sky-400'
+                  }`}>
+                  {sending ? 'Enviando...' : via === 'whatsapp'
+                    ? <><MessageCircle size={16} /><span>Abrir WhatsApp</span></>
+                    : <><span>Enviar por email</span><ArrowRight size={16} /></>
+                  }
                 </button>
-                <p className="text-slate-600 text-xs text-center">Respuesta garantizada en menos de 24h</p>
+                <p className="text-slate-600 text-xs text-center">
+                  {via === 'whatsapp' ? 'Se abrirá WhatsApp con el mensaje listo para enviar' : 'Respuesta garantizada en menos de 24h'}
+                </p>
               </form>
             )}
           </div>
@@ -703,7 +775,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
           <li><span className="text-slate-300 font-medium">Denominación:</span> Solimar &amp; Co</li>
           <li><span className="text-slate-300 font-medium">Actividad:</span> Agencia de desarrollo web y servicios digitales para negocios locales</li>
           <li><span className="text-slate-300 font-medium">Domicilio:</span> Tenerife, Islas Canarias, España</li>
-          <li><span className="text-slate-300 font-medium">Correo electrónico:</span> hola@solimarco.com</li>
+          <li><span className="text-slate-300 font-medium">Correo electrónico:</span> solimarcoweb@gmail.com</li>
           <li>
             <span className="text-slate-300 font-medium">Situación fiscal:</span>{' '}
             Alta como trabajador autónomo en trámite ante la Agencia Tributaria y la Seguridad Social.
@@ -769,7 +841,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
           Los datos personales facilitados a través del formulario de contacto del Sitio serán tratados por
           Solimar &amp; Co con la finalidad de gestionar su consulta o solicitud de presupuesto. No se cederán
           a terceros sin su consentimiento, salvo obligación legal. Puede ejercer sus derechos de acceso,
-          rectificación, supresión y portabilidad escribiendo a hola@solimarco.com.
+          rectificación, supresión y portabilidad escribiendo a solimarcoweb@gmail.com.
         </p>
       </section>
 
@@ -878,7 +950,7 @@ function CookiesPolicyPage({ onBack }: { onBack: () => void }) {
         <h2 className="text-xl font-semibold text-white mb-3">5. Contacto</h2>
         <p>
           Para cualquier consulta sobre el uso de cookies en este sitio, puedes contactarnos en{' '}
-          <a href="mailto:hola@solimarco.com" className="text-sky-400 hover:text-sky-300 transition-colors">hola@solimarco.com</a>.
+          <a href="mailto:solimarcoweb@gmail.com" className="text-sky-400 hover:text-sky-300 transition-colors">solimarcoweb@gmail.com</a>.
         </p>
       </section>
 
