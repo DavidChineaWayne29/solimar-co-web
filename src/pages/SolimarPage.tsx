@@ -201,7 +201,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur border-b border-slate-800' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <Logo className="h-8 w-auto" />
+        <Logo className="h-11 w-auto" />
 
         <nav className="hidden md:flex items-center gap-8">
           {[['sectores','Sectores'],['proyectos','Proyectos'],['planes','Planes'],['contacto','Contacto']].map(([id, label]) => (
@@ -643,7 +643,7 @@ function Footer({ onNavigate }: { onNavigate: (page: LegalPage) => void }) {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <Logo className="h-7 w-auto" />
+        <Logo className="h-9 w-auto" />
         <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
         <div className="flex gap-6">
           <button onClick={() => onNavigate('aviso-legal')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Aviso legal</button>
@@ -665,7 +665,7 @@ function LegalLayout({ title, onBack, children }: { title: string; onBack: () =>
             <ChevronLeft size={16} />
             Volver
           </button>
-          <Logo className="h-7 w-auto" />
+          <Logo className="h-9 w-auto" />
         </div>
       </header>
 
