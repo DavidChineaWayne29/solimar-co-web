@@ -3,7 +3,7 @@ import {
   Menu, X, ArrowRight, Check, ExternalLink,
   UtensilsCrossed, ShoppingBag, Sparkles, Building2, PawPrint, Wrench,
   MessageCircle, Mail, MapPin, ChevronDown,
-  Zap, Shield, Clock, Users
+  Zap, Shield, Clock, Users, ChevronLeft
 } from 'lucide-react'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -64,9 +64,9 @@ const PORTFOLIO = [
     name: 'El Rincón Canario',
     sector: 'Restaurante',
     desc: 'Menú digital con alérgenos, reservas online, galería y panel de gestión propio.',
-    url: 'https://restaurante-rincon-canario.vercel.app/',
+    url: 'https://web-templates-rouge.vercel.app',
     img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-orange-500 text-white border-orange-600',
+    badge_color: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
     live: true,
   },
   {
@@ -74,18 +74,18 @@ const PORTFOLIO = [
     sector: 'Moda & Retail',
     desc: 'Catálogo de productos con tienda integrada y pedidos por WhatsApp.',
     url: 'https://boutique-maria.vercel.app/',
-    img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-pink-500 text-white border-pink-600',
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80',
+    badge_color: 'bg-pink-500/20 text-pink-300 border-pink-500/30',
     live: true,
   },
   {
-    name: 'Centro Estético Altamira',
+    name: 'Clínica Estética Sol',
     sector: 'Salud & Belleza',
-    desc: 'Citas online 24h, gestión de tratamientos, horarios y panel de administración completo.',
-    url: 'https://centro-estetico-altamira.vercel.app/',
-    img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80',
-    badge_color: 'bg-violet-500 text-white border-violet-600',
-    live: true,
+    desc: 'Citas online 24h, servicios, equipo y galería de resultados.',
+    url: '#',
+    img: 'https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=600&q=80',
+    badge_color: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
+    live: false,
   },
 ]
 
@@ -188,9 +188,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur border-b border-slate-800' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <span className="font-bold text-xl text-white tracking-tight">
-          Solimar<span className="text-sky-400">&</span>Co.
-        </span>
+        <img src="/logo.svg" alt="Solimar&Co" className="h-8 w-auto" />
 
         <nav className="hidden md:flex items-center gap-8">
           {[['sectores','Sectores'],['proyectos','Proyectos'],['planes','Planes'],['contacto','Contacto']].map(([id, label]) => (
@@ -318,21 +316,16 @@ function Portfolio() {
     <section id="proyectos" className="py-24 bg-slate-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Portfolio</p>
+          <p className="text-sky-400 text-sm font-semibold uppercase tracking-widest mb-3">Proyectos reales</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Ve el resultado antes de decidir</h2>
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Proyectos de demostración creados para mostrar las posibilidades de cada sector. Entra, navega y comprueba la calidad tú mismo.
-          </p>
-          <p className="inline-flex items-center gap-2 mt-4 text-xs text-slate-500 bg-slate-800 border border-slate-700 px-4 py-2 rounded-full">
-            <span className="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
-            Estos son proyectos de ejemplo — no representan negocios reales
+            Demos en vivo de webs que hemos creado. Entra, navega y comprueba la calidad tú mismo.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PORTFOLIO.map((p) => (
-            <a key={p.name} href={p.live ? p.url : undefined} target={p.live ? '_blank' : undefined} rel="noopener noreferrer"
-              className={`bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group transition-all block ${p.live ? 'hover:border-slate-500 hover:shadow-xl hover:shadow-black/30 hover:-translate-y-1 cursor-pointer' : 'cursor-default'}`}>
+            <div key={p.name} className="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden group hover:border-slate-500 transition-colors">
               <div className="relative h-48 overflow-hidden">
                 <img src={p.img} alt={p.name} loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -365,7 +358,7 @@ function Portfolio() {
                   </span>
                 )}
               </div>
-            </a>
+            </div>
           ))}
         </div>
 
@@ -434,11 +427,13 @@ function Pricing({ onContact }: { onContact: () => void }) {
               <h3 className={`text-lg font-bold mb-1 ${plan.highlight ? 'text-sky-400' : 'text-white'}`}>{plan.name}</h3>
               <p className="text-slate-400 text-sm mb-5">{plan.desc}</p>
 
-              <div className="flex items-end gap-1 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-widest text-sky-400/80 mb-1">Único pago</p>
+              <div className="flex items-end gap-1 mb-1">
                 <span className="text-4xl font-bold text-white">{plan.price}€</span>
                 <span className="text-slate-400 text-sm mb-1.5">desarrollo</span>
               </div>
-              <p className="text-slate-400 text-sm mb-6">+ {plan.monthly}€/mes mantenimiento</p>
+              <p className="text-slate-500 text-xs mb-1">+ IGIC</p>
+              <p className="text-slate-400 text-sm mb-6">+ {plan.monthly}€/mes mantenimiento + IGIC</p>
 
               <ul className="space-y-3 mb-7">
                 {plan.features.map((f) => (
@@ -506,55 +501,11 @@ function Testimonials() {
 
 function Contact() {
   const [fields, setFields] = useState({ name: '', email: '', phone: '', sector: '', message: '' })
-  const [via, setVia] = useState<'email' | 'whatsapp'>('email')
   const [sent, setSent] = useState(false)
-  const [sending, setSending] = useState(false)
-  const [error, setError] = useState('')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setError('')
-
-    if (via === 'whatsapp') {
-      const msg = encodeURIComponent(
-        `Hola, me interesa vuestra web para mi negocio.\n\n` +
-        `👤 Nombre: ${fields.name}\n` +
-        `🏪 Sector: ${fields.sector || 'No especificado'}\n` +
-        `📞 Teléfono: ${fields.phone}\n\n` +
-        `💬 ${fields.message}`
-      )
-      window.open(`https://wa.me/34618542063?text=${msg}`, '_blank')
-      setSent(true)
-      return
-    }
-
-    setSending(true)
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '85f32425-d389-4407-9a5c-284fc31d8c34',
-          subject: `Nueva solicitud de ${fields.name} — Solimar&Co.`,
-          from_name: 'Solimar&Co. Web',
-          name: fields.name,
-          email: fields.email,
-          phone: fields.phone || '—',
-          sector: fields.sector || '—',
-          message: fields.message,
-        }),
-      })
-      const data = await res.json()
-      if (data.success) {
-        setSent(true)
-      } else {
-        setError('Error al enviar. Inténtalo de nuevo o escríbenos por WhatsApp.')
-      }
-    } catch {
-      setError('Error de red. Inténtalo de nuevo.')
-    } finally {
-      setSending(false)
-    }
+    setSent(true)
   }
 
   const inputClass = 'w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors'
@@ -577,8 +528,8 @@ function Contact() {
 
             <div className="space-y-6">
               {[
-                { icon: MessageCircle, label: 'WhatsApp', value: '+34 618 542 063', href: 'https://wa.me/34618542063' },
-                { icon: Mail, label: 'Email', value: 'solimarcoweb@gmail.com', href: 'mailto:solimarcoweb@gmail.com' },
+                { icon: MessageCircle, label: 'WhatsApp', value: '+34 600 000 000', href: 'https://wa.me/34600000000' },
+                { icon: Mail, label: 'Email', value: 'hola@solimarco.com', href: 'mailto:hola@solimarco.com' },
                 { icon: MapPin, label: 'Ubicación', value: 'Tenerife, Canarias', href: null },
               ].map(({ icon: Icon, label, value, href }) => (
                 <div key={label} className="flex items-center gap-4">
@@ -625,27 +576,6 @@ function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-
-                {/* Toggle Email / WhatsApp */}
-                <div>
-                  <p className="text-slate-400 text-xs mb-2">¿Cómo prefieres que te contactemos?</p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {(['email', 'whatsapp'] as const).map((opt) => (
-                      <button key={opt} type="button" onClick={() => setVia(opt)}
-                        className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border text-sm font-medium transition-all ${
-                          via === opt
-                            ? opt === 'whatsapp'
-                              ? 'bg-emerald-500/15 border-emerald-500 text-emerald-400'
-                              : 'bg-sky-500/15 border-sky-500 text-sky-400'
-                            : 'border-slate-600 text-slate-400 hover:border-slate-500'
-                        }`}>
-                        {opt === 'whatsapp' ? <MessageCircle size={15} /> : <Mail size={15} />}
-                        {opt === 'whatsapp' ? 'WhatsApp' : 'Email'}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-slate-400 text-xs block mb-1.5">Nombre *</label>
@@ -653,20 +583,16 @@ function Contact() {
                       required placeholder="Tu nombre" className={inputClass} />
                   </div>
                   <div>
-                    <label className="text-slate-400 text-xs block mb-1.5">
-                      Teléfono {via === 'whatsapp' ? '*' : ''}
-                    </label>
+                    <label className="text-slate-400 text-xs block mb-1.5">Teléfono</label>
                     <input value={fields.phone} onChange={e => setFields(f => ({ ...f, phone: e.target.value }))}
-                      required={via === 'whatsapp'} placeholder="+34 600 000 000" className={inputClass} />
+                      placeholder="+34 600 000 000" className={inputClass} />
                   </div>
                 </div>
-                {via === 'email' && (
                 <div>
                   <label className="text-slate-400 text-xs block mb-1.5">Email *</label>
                   <input type="email" value={fields.email} onChange={e => setFields(f => ({ ...f, email: e.target.value }))}
                     required placeholder="tu@email.com" className={inputClass} />
                 </div>
-                )}
                 <div>
                   <label className="text-slate-400 text-xs block mb-1.5">Sector de tu negocio</label>
                   <select value={fields.sector} onChange={e => setFields(f => ({ ...f, sector: e.target.value }))}
@@ -683,21 +609,12 @@ function Contact() {
                     required rows={3} placeholder="Cuéntanos tu negocio y qué esperas de tu web..."
                     className={`${inputClass} resize-none`} />
                 </div>
-                {error && (
-                  <p className="text-red-400 text-xs text-center bg-red-500/10 border border-red-500/20 rounded-lg px-4 py-2">{error}</p>
-                )}
-                <button type="submit" disabled={sending}
-                  className={`w-full disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 ${
-                    via === 'whatsapp' ? 'bg-emerald-500 hover:bg-emerald-400' : 'bg-sky-500 hover:bg-sky-400'
-                  }`}>
-                  {sending ? 'Enviando...' : via === 'whatsapp'
-                    ? <><MessageCircle size={16} /><span>Abrir WhatsApp</span></>
-                    : <><span>Enviar por email</span><ArrowRight size={16} /></>
-                  }
+                <button type="submit"
+                  className="w-full bg-sky-500 hover:bg-sky-400 text-white py-3.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                  Enviar solicitud
+                  <ArrowRight size={16} />
                 </button>
-                <p className="text-slate-600 text-xs text-center">
-                  {via === 'whatsapp' ? 'Se abrirá WhatsApp con el mensaje listo para enviar' : 'Respuesta garantizada en menos de 24h'}
-                </p>
+                <p className="text-slate-600 text-xs text-center">Respuesta garantizada en menos de 24h</p>
               </form>
             )}
           </div>
@@ -707,34 +624,295 @@ function Contact() {
   )
 }
 
-function Footer() {
+type LegalPage = 'home' | 'aviso-legal' | 'cookies'
+
+function Footer({ onNavigate }: { onNavigate: (page: LegalPage) => void }) {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <span className="font-bold text-white text-lg">
-          Solimar<span className="text-sky-400">&</span>Co.
-        </span>
+        <img src="/logo.svg" alt="Solimar&Co" className="h-7 w-auto" />
         <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
         <div className="flex gap-6">
-          {['Aviso legal', 'Cookies'].map(l => (
-            <a key={l} href="#" className="text-slate-600 hover:text-slate-400 text-sm transition-colors">{l}</a>
-          ))}
+          <button onClick={() => onNavigate('aviso-legal')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Aviso legal</button>
+          <button onClick={() => onNavigate('cookies')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Política de cookies</button>
         </div>
       </div>
     </footer>
   )
 }
 
+// ─── Legal pages ──────────────────────────────────────────────────────────────
+
+function LegalLayout({ title, onBack, children }: { title: string; onBack: () => void; children: React.ReactNode }) {
+  return (
+    <div className="bg-slate-950 text-slate-50 antialiased font-sans min-h-screen">
+      <header className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur border-b border-slate-800">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+          <button onClick={onBack} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
+            <ChevronLeft size={16} />
+            Volver
+          </button>
+          <img src="/logo.svg" alt="Solimar&Co" className="h-7 w-auto" />
+        </div>
+      </header>
+
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-10">{title}</h1>
+        <div className="prose prose-invert prose-slate max-w-none space-y-8 text-slate-300 leading-relaxed">
+          {children}
+        </div>
+      </main>
+
+      <footer className="border-t border-slate-800 py-8 mt-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-slate-600 text-sm text-center">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+function AvisoLegalPage({ onBack }: { onBack: () => void }) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    document.title = 'Aviso Legal · Solimar&Co'
+  }, [])
+
+  return (
+    <LegalLayout title="Aviso Legal" onBack={onBack}>
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">1. Datos identificativos del titular</h2>
+        <p>
+          En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la
+          Información y de Comercio Electrónico (LSSI-CE), se informa que el titular de este sitio web es:
+        </p>
+        <ul className="list-none space-y-1 mt-3 text-slate-400 text-sm">
+          <li><span className="text-slate-300 font-medium">Denominación:</span> Solimar &amp; Co</li>
+          <li><span className="text-slate-300 font-medium">Actividad:</span> Agencia de desarrollo web y servicios digitales para negocios locales</li>
+          <li><span className="text-slate-300 font-medium">Domicilio:</span> Tenerife, Islas Canarias, España</li>
+          <li><span className="text-slate-300 font-medium">Correo electrónico:</span> hola@solimarco.com</li>
+          <li>
+            <span className="text-slate-300 font-medium">Situación fiscal:</span>{' '}
+            Alta como trabajador autónomo en trámite ante la Agencia Tributaria y la Seguridad Social.
+            Durante este período de constitución, la actividad se desarrolla conforme a la normativa vigente,
+            asumiendo el titular plena responsabilidad frente a clientes y terceros.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">2. Objeto y ámbito de aplicación</h2>
+        <p>
+          El presente Aviso Legal regula el acceso y uso del sitio web solimarco.com (en adelante, "el Sitio"),
+          titularidad de Solimar &amp; Co, a través del cual se ofrece información sobre servicios de diseño y
+          desarrollo de páginas web para negocios locales en Tenerife.
+        </p>
+        <p className="mt-3">
+          El acceso y/o uso del Sitio atribuye la condición de usuario, que acepta, desde dicho acceso y/o uso,
+          las condiciones recogidas en este Aviso Legal.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">3. Propiedad intelectual e industrial</h2>
+        <p>
+          Todos los contenidos del Sitio — incluyendo, a título enunciativo, textos, fotografías, gráficos,
+          imágenes, tecnología, software, diseño gráfico y código fuente — son propiedad de Solimar &amp; Co
+          o de terceros que han autorizado su uso, y están protegidos por las leyes de propiedad intelectual e
+          industrial vigentes.
+        </p>
+        <p className="mt-3">
+          Queda expresamente prohibida la reproducción, distribución, comunicación pública o transformación
+          total o parcial de los contenidos del Sitio sin autorización expresa por escrito de Solimar &amp; Co.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">4. Limitación de responsabilidad</h2>
+        <p>
+          Solimar &amp; Co no garantiza la disponibilidad ininterrumpida del Sitio ni la ausencia de errores en
+          sus contenidos. Los contenidos del Sitio tienen carácter meramente informativo y no constituyen
+          oferta vinculante de servicios. Los presupuestos y condiciones concretas se acuerdan individualmente
+          con cada cliente.
+        </p>
+        <p className="mt-3">
+          Solimar &amp; Co no se hace responsable de los daños y perjuicios que pudieran derivarse del uso del
+          Sitio, de la imposibilidad de acceso o de la presencia de virus informáticos.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">5. Precios y fiscalidad</h2>
+        <p>
+          Los precios indicados en el Sitio son orientativos y no incluyen el Impuesto General Indirecto Canario
+          (IGIC), que será aplicado conforme a la normativa fiscal vigente en las Islas Canarias. El presupuesto
+          final se detallará en la propuesta enviada a cada cliente.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">6. Protección de datos</h2>
+        <p>
+          Los datos personales facilitados a través del formulario de contacto del Sitio serán tratados por
+          Solimar &amp; Co con la finalidad de gestionar su consulta o solicitud de presupuesto. No se cederán
+          a terceros sin su consentimiento, salvo obligación legal. Puede ejercer sus derechos de acceso,
+          rectificación, supresión y portabilidad escribiendo a hola@solimarco.com.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">7. Ley aplicable y jurisdicción</h2>
+        <p>
+          Las presentes condiciones se rigen por la legislación española. Para la resolución de cualquier
+          controversia derivada del acceso o uso del Sitio, las partes se someten a la jurisdicción de los
+          Juzgados y Tribunales de Santa Cruz de Tenerife, con renuncia expresa a cualquier otro fuero que
+          pudiera corresponderles.
+        </p>
+      </section>
+
+      <p className="text-slate-500 text-xs pt-4 border-t border-slate-800">Última actualización: junio de 2025</p>
+    </LegalLayout>
+  )
+}
+
+function CookiesPolicyPage({ onBack }: { onBack: () => void }) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    document.title = 'Política de Cookies · Solimar&Co'
+  }, [])
+
+  return (
+    <LegalLayout title="Política de Cookies" onBack={onBack}>
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">1. ¿Qué son las cookies?</h2>
+        <p>
+          Las cookies son pequeños archivos de texto que los sitios web almacenan en el dispositivo del usuario.
+          Permiten que el sitio recuerde información sobre tu visita, como el idioma preferido y otras opciones,
+          con el fin de facilitar tu próxima visita y hacer que el sitio te resulte más útil.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">2. Cookies que utiliza este sitio</h2>
+        <p className="mb-4">
+          Este sitio web tiene un enfoque respetuoso con la privacidad. A continuación se detallan las cookies
+          y tecnologías de seguimiento utilizadas:
+        </p>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-slate-700">
+                <th className="text-left py-3 pr-6 text-slate-300 font-semibold">Tipo</th>
+                <th className="text-left py-3 pr-6 text-slate-300 font-semibold">Proveedor</th>
+                <th className="text-left py-3 text-slate-300 font-semibold">Finalidad</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800">
+              <tr>
+                <td className="py-3 pr-6 text-slate-400">Técnica</td>
+                <td className="py-3 pr-6 text-slate-400">Vercel</td>
+                <td className="py-3 text-slate-400">Hosting y entrega de contenido. Sin seguimiento personal.</td>
+              </tr>
+              <tr>
+                <td className="py-3 pr-6 text-slate-400">Analítica</td>
+                <td className="py-3 pr-6 text-slate-400">Vercel Analytics</td>
+                <td className="py-3 text-slate-400">Estadísticas de visitas agregadas. Sin cookies, sin seguimiento individual, compatible con RGPD.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-6 bg-sky-500/10 border border-sky-500/20 rounded-xl p-4">
+          <p className="text-sky-300 text-sm font-medium mb-1">Sin banner de cookies necesario</p>
+          <p className="text-slate-400 text-sm">
+            Las herramientas de analítica que utilizamos (Vercel Analytics) no emplean cookies ni rastrean
+            a usuarios individuales, por lo que este sitio no requiere consentimiento de cookies según
+            el Reglamento General de Protección de Datos (RGPD) y la Ley de Servicios de la Sociedad de
+            la Información (LSSI).
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">3. Cómo gestionar o desactivar las cookies</h2>
+        <p className="mb-3">
+          Puedes configurar tu navegador para que rechace todas las cookies, acepte solo determinadas cookies
+          o te avise cuando se envíe una cookie. A continuación encontrarás los enlaces de configuración de
+          los navegadores más habituales:
+        </p>
+        <ul className="space-y-2 text-sm text-slate-400">
+          <li><span className="text-slate-300">Google Chrome:</span> Ajustes → Privacidad y seguridad → Cookies y otros datos de sitios</li>
+          <li><span className="text-slate-300">Mozilla Firefox:</span> Preferencias → Privacidad y seguridad → Cookies y datos del sitio</li>
+          <li><span className="text-slate-300">Safari:</span> Preferencias → Privacidad → Cookies y datos del sitio web</li>
+          <li><span className="text-slate-300">Microsoft Edge:</span> Configuración → Cookies y permisos del sitio</li>
+        </ul>
+        <p className="mt-3 text-slate-500 text-sm">
+          Ten en cuenta que deshabilitar las cookies podría afectar a la funcionalidad de algunos sitios web.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">4. Cambios en esta política</h2>
+        <p>
+          Solimar &amp; Co se reserva el derecho a actualizar esta Política de Cookies para adaptarla a
+          cambios legislativos o a modificaciones en las herramientas utilizadas. Se recomienda revisar
+          esta página periódicamente.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-xl font-semibold text-white mb-3">5. Contacto</h2>
+        <p>
+          Para cualquier consulta sobre el uso de cookies en este sitio, puedes contactarnos en{' '}
+          <a href="mailto:hola@solimarco.com" className="text-sky-400 hover:text-sky-300 transition-colors">hola@solimarco.com</a>.
+        </p>
+      </section>
+
+      <p className="text-slate-500 text-xs pt-4 border-t border-slate-800">Última actualización: junio de 2025</p>
+    </LegalLayout>
+  )
+}
+
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 export function SolimarPage() {
-  const scrollToContact = () => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })
+  const [page, setPage] = useState<LegalPage>('home')
+
+  const navigate = (p: LegalPage) => {
+    setPage(p)
+    const path = p === 'home' ? '/' : `/${p}`
+    history.pushState(null, '', path)
+  }
 
   useEffect(() => {
-    document.title = 'Solimar&Co · Webs para negocios locales en Tenerife'
-    const link = document.querySelector("link[rel~='icon']") as HTMLLinkElement
-    if (link) link.href = '/favicon.svg'
+    const handlePop = () => {
+      const path = window.location.pathname
+      if (path === '/aviso-legal') setPage('aviso-legal')
+      else if (path === '/cookies') setPage('cookies')
+      else setPage('home')
+    }
+    window.addEventListener('popstate', handlePop)
+    return () => window.removeEventListener('popstate', handlePop)
   }, [])
+
+  useEffect(() => {
+    if (page !== 'home') return
+    document.title = 'Solimar&Co · Webs para negocios locales en Tenerife'
+    let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement
+    if (!link) {
+      link = document.createElement('link')
+      link.rel = 'icon'
+      link.type = 'image/svg+xml'
+      document.head.appendChild(link)
+    }
+    link.href = '/favicon.svg'
+  }, [page])
+
+  if (page === 'aviso-legal') return <AvisoLegalPage onBack={() => navigate('home')} />
+  if (page === 'cookies') return <CookiesPolicyPage onBack={() => navigate('home')} />
+
+  const scrollToContact = () => document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
     <div className="bg-slate-950 text-slate-50 antialiased font-sans">
@@ -746,7 +924,7 @@ export function SolimarPage() {
       <Pricing onContact={scrollToContact} />
       <Testimonials />
       <Contact />
-      <Footer />
+      <Footer onNavigate={navigate} />
     </div>
   )
 }
