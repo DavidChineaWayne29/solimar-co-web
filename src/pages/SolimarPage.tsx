@@ -13,7 +13,7 @@ function Logo({ className = 'h-8 w-auto' }: { className?: string }) {
       <path d="M7 34 Q16.5 26 26 34 Q35.5 42 45 34" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
       <path d="M7 43 Q16.5 35 26 43 Q35.5 51 45 43" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.35"/>
       <text x="59" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="24" letterSpacing="-0.4">
-        <tspan fill="#ffffff">Solimar</tspan><tspan fill="#38bdf8">&amp;</tspan><tspan fill="#ffffff">Co</tspan>
+        <tspan fill="#ffffff">Solimar</tspan><tspan fill="#38bdf8">&amp;</tspan><tspan fill="#ffffff">Co.</tspan>
       </text>
     </svg>
   )
@@ -721,7 +721,7 @@ function Footer({ onNavigate }: { onNavigate: (page: LegalPage) => void }) {
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <Logo className="h-10 w-auto" />
-        <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
+        <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co. · Tenerife, Canarias</p>
         <div className="flex gap-6">
           <button onClick={() => onNavigate('aviso-legal')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Aviso legal</button>
           <button onClick={() => onNavigate('cookies')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Política de cookies</button>
@@ -755,7 +755,7 @@ function LegalLayout({ title, onBack, children }: { title: string; onBack: () =>
 
       <footer className="border-t border-slate-800 py-8 mt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-slate-600 text-sm text-center">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
+          <p className="text-slate-600 text-sm text-center">© {new Date().getFullYear()} Solimar&Co. · Tenerife, Canarias</p>
         </div>
       </footer>
     </div>
@@ -765,7 +765,7 @@ function LegalLayout({ title, onBack, children }: { title: string; onBack: () =>
 function AvisoLegalPage({ onBack }: { onBack: () => void }) {
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Aviso Legal · Solimar&Co'
+    document.title = 'Aviso Legal · Solimar&Co.'
   }, [])
 
   return (
@@ -777,7 +777,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
           Información y de Comercio Electrónico (LSSI-CE), se informa que el titular de este sitio web es:
         </p>
         <ul className="list-none space-y-1 mt-3 text-slate-400 text-sm">
-          <li><span className="text-slate-300 font-medium">Denominación:</span> Solimar &amp; Co</li>
+          <li><span className="text-slate-300 font-medium">Denominación:</span> Solimar &amp; Co.</li>
           <li><span className="text-slate-300 font-medium">Actividad:</span> Agencia de desarrollo web y servicios digitales para negocios locales</li>
           <li><span className="text-slate-300 font-medium">Domicilio:</span> Tenerife, Islas Canarias, España</li>
           <li><span className="text-slate-300 font-medium">Correo electrónico:</span> solimarcoweb@gmail.com</li>
@@ -794,7 +794,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
         <h2 className="text-xl font-semibold text-white mb-3">2. Objeto y ámbito de aplicación</h2>
         <p>
           El presente Aviso Legal regula el acceso y uso del sitio web solimarco.com (en adelante, "el Sitio"),
-          titularidad de Solimar &amp; Co, a través del cual se ofrece información sobre servicios de diseño y
+          titularidad de Solimar &amp; Co., a través del cual se ofrece información sobre servicios de diseño y
           desarrollo de páginas web para negocios locales en Tenerife.
         </p>
         <p className="mt-3">
@@ -807,26 +807,26 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
         <h2 className="text-xl font-semibold text-white mb-3">3. Propiedad intelectual e industrial</h2>
         <p>
           Todos los contenidos del Sitio — incluyendo, a título enunciativo, textos, fotografías, gráficos,
-          imágenes, tecnología, software, diseño gráfico y código fuente — son propiedad de Solimar &amp; Co
+          imágenes, tecnología, software, diseño gráfico y código fuente — son propiedad de Solimar &amp; Co.
           o de terceros que han autorizado su uso, y están protegidos por las leyes de propiedad intelectual e
           industrial vigentes.
         </p>
         <p className="mt-3">
           Queda expresamente prohibida la reproducción, distribución, comunicación pública o transformación
-          total o parcial de los contenidos del Sitio sin autorización expresa por escrito de Solimar &amp; Co.
+          total o parcial de los contenidos del Sitio sin autorización expresa por escrito de Solimar &amp; Co..
         </p>
       </section>
 
       <section>
         <h2 className="text-xl font-semibold text-white mb-3">4. Limitación de responsabilidad</h2>
         <p>
-          Solimar &amp; Co no garantiza la disponibilidad ininterrumpida del Sitio ni la ausencia de errores en
+          Solimar &amp; Co. no garantiza la disponibilidad ininterrumpida del Sitio ni la ausencia de errores en
           sus contenidos. Los contenidos del Sitio tienen carácter meramente informativo y no constituyen
           oferta vinculante de servicios. Los presupuestos y condiciones concretas se acuerdan individualmente
           con cada cliente.
         </p>
         <p className="mt-3">
-          Solimar &amp; Co no se hace responsable de los daños y perjuicios que pudieran derivarse del uso del
+          Solimar &amp; Co. no se hace responsable de los daños y perjuicios que pudieran derivarse del uso del
           Sitio, de la imposibilidad de acceso o de la presencia de virus informáticos.
         </p>
       </section>
@@ -844,7 +844,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
         <h2 className="text-xl font-semibold text-white mb-3">6. Protección de datos</h2>
         <p>
           Los datos personales facilitados a través del formulario de contacto del Sitio serán tratados por
-          Solimar &amp; Co con la finalidad de gestionar su consulta o solicitud de presupuesto. No se cederán
+          Solimar &amp; Co. con la finalidad de gestionar su consulta o solicitud de presupuesto. No se cederán
           a terceros sin su consentimiento, salvo obligación legal. Puede ejercer sus derechos de acceso,
           rectificación, supresión y portabilidad escribiendo a solimarcoweb@gmail.com.
         </p>
@@ -868,7 +868,7 @@ function AvisoLegalPage({ onBack }: { onBack: () => void }) {
 function CookiesPolicyPage({ onBack }: { onBack: () => void }) {
   useEffect(() => {
     window.scrollTo(0, 0)
-    document.title = 'Política de Cookies · Solimar&Co'
+    document.title = 'Política de Cookies · Solimar&Co.'
   }, [])
 
   return (
@@ -945,7 +945,7 @@ function CookiesPolicyPage({ onBack }: { onBack: () => void }) {
       <section>
         <h2 className="text-xl font-semibold text-white mb-3">4. Cambios en esta política</h2>
         <p>
-          Solimar &amp; Co se reserva el derecho a actualizar esta Política de Cookies para adaptarla a
+          Solimar &amp; Co. se reserva el derecho a actualizar esta Política de Cookies para adaptarla a
           cambios legislativos o a modificaciones en las herramientas utilizadas. Se recomienda revisar
           esta página periódicamente.
         </p>
@@ -988,7 +988,7 @@ export function SolimarPage() {
 
   useEffect(() => {
     if (page !== 'home') return
-    document.title = 'Solimar&Co · Webs para negocios locales en Tenerife'
+    document.title = 'Solimar&Co. · Webs para negocios locales en Tenerife'
     let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement
     if (!link) {
       link = document.createElement('link')
