@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 500">
+  <!-- Fondo oscuro -->
+  <rect width="1500" height="500" fill="#0f172a"/>
+
+  <!-- Icono: Sol + Olas — centrado verticalmente, a la izquierda del texto -->
+  <!-- Sol -->
+  <circle cx="430" cy="200" r="58" fill="#38bdf8"/>
+  <!-- Ola 1 -->
+  <path d="M310 308 Q370 262 430 308 Q490 354 550 308" stroke="#38bdf8" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Ola 2 (sutil) -->
+  <path d="M310 358 Q370 312 430 358 Q490 404 550 358" stroke="#38bdf8" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
+
+  <!-- Línea vertical separadora -->
+  <line x1="620" y1="140" x2="620" y2="360" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Wordmark -->
+  <text x="670" y="285" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="130" letter-spacing="-1">
+    <tspan fill="#ffffff">Solimar</tspan><tspan fill="#38bdf8">&amp;</tspan><tspan fill="#ffffff">Co</tspan>
+  </text>
+
+  <!-- Tagline debajo -->
+  <text x="672" y="340" font-family="'Inter','Helvetica Neue',Arial,sans-serif" font-weight="400" font-size="26" fill="#475569" letter-spacing="2.5">
+    WEBS PARA NEGOCIOS LOCALES · TENERIFE
+  </text>
+</svg>
