@@ -6,6 +6,19 @@ import {
   Zap, Shield, Clock, Users, ChevronLeft
 } from 'lucide-react'
 
+function Logo({ className = 'h-8 w-auto' }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 52" fill="none" aria-label="Solimar&Co" className={className}>
+      <circle cx="26" cy="16" r="9" fill="#38bdf8"/>
+      <path d="M7 34 Q16.5 26 26 34 Q35.5 42 45 34" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+      <path d="M7 43 Q16.5 35 26 43 Q35.5 51 45 43" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.35"/>
+      <text x="59" y="36" fontFamily="'Inter','Helvetica Neue',Arial,sans-serif" fontWeight="800" fontSize="24" letterSpacing="-0.4">
+        <tspan fill="#ffffff">Solimar</tspan><tspan fill="#38bdf8">&amp;</tspan><tspan fill="#ffffff">Co</tspan>
+      </text>
+    </svg>
+  )
+}
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const SECTORS = [
@@ -188,7 +201,7 @@ function Navbar({ onContact }: { onContact: () => void }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur border-b border-slate-800' : ''}`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <img src="/logo.svg" alt="Solimar&Co" className="h-8 w-auto" />
+        <Logo className="h-8 w-auto" />
 
         <nav className="hidden md:flex items-center gap-8">
           {[['sectores','Sectores'],['proyectos','Proyectos'],['planes','Planes'],['contacto','Contacto']].map(([id, label]) => (
@@ -630,7 +643,7 @@ function Footer({ onNavigate }: { onNavigate: (page: LegalPage) => void }) {
   return (
     <footer className="bg-slate-950 border-t border-slate-800 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <img src="/logo.svg" alt="Solimar&Co" className="h-7 w-auto" />
+        <Logo className="h-7 w-auto" />
         <p className="text-slate-600 text-sm">© {new Date().getFullYear()} Solimar&Co · Tenerife, Canarias</p>
         <div className="flex gap-6">
           <button onClick={() => onNavigate('aviso-legal')} className="text-slate-600 hover:text-slate-400 text-sm transition-colors">Aviso legal</button>
@@ -652,7 +665,7 @@ function LegalLayout({ title, onBack, children }: { title: string; onBack: () =>
             <ChevronLeft size={16} />
             Volver
           </button>
-          <img src="/logo.svg" alt="Solimar&Co" className="h-7 w-auto" />
+          <Logo className="h-7 w-auto" />
         </div>
       </header>
 
