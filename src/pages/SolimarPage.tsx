@@ -468,9 +468,13 @@ function Pricing({ onContact }: { onContact: () => void }) {
           ))}
         </div>
 
-        <p className="text-center text-slate-500 text-sm mt-10">
-          ¿Necesitas algo específico? <button onClick={onContact} className="text-sky-400 hover:text-sky-300 transition-colors">Hablamos y te hacemos una propuesta a medida →</button>
-        </p>
+        <div className="mt-12 rounded-2xl border border-slate-700 bg-slate-800/60 px-8 py-8 text-center">
+          <p className="text-white font-semibold text-lg mb-2">¿Tu negocio no encaja exactamente en ningún plan?</p>
+          <p className="text-slate-400 text-sm mb-6 max-w-lg mx-auto">Cuéntame lo que necesitas y te preparo un presupuesto a medida, sin compromiso.</p>
+          <button onClick={onContact} className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-colors">
+            Pedir presupuesto personalizado →
+          </button>
+        </div>
       </div>
     </section>
   )
