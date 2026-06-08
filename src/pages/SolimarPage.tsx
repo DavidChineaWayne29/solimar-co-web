@@ -468,10 +468,13 @@ function Pricing({ onContact }: { onContact: () => void }) {
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-slate-700 bg-slate-800/60 px-8 py-8 text-center">
-          <p className="text-white font-semibold text-lg mb-2">¿Tu negocio no encaja exactamente en ningún plan?</p>
-          <p className="text-slate-400 text-sm mb-6 max-w-lg mx-auto">Cuéntame lo que necesitas y te preparo un presupuesto a medida, sin compromiso.</p>
-          <button onClick={onContact} className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-colors">
+        <div className="mt-12 rounded-2xl border border-sky-500/40 bg-gradient-to-br from-sky-500/10 via-slate-800/80 to-violet-500/10 px-8 py-10 text-center shadow-lg shadow-sky-900/20">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-500/20 border border-sky-500/30 mb-5">
+            <MessageCircle size={22} className="text-sky-400" />
+          </div>
+          <p className="text-white font-bold text-xl mb-2">¿Tu negocio no encaja exactamente en ningún plan?</p>
+          <p className="text-slate-400 text-sm mb-7 max-w-md mx-auto leading-relaxed">Cuéntame lo que necesitas y te preparo un presupuesto a medida, sin compromiso.</p>
+          <button onClick={onContact} className="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-400 active:scale-95 text-white text-sm font-semibold px-7 py-3.5 rounded-xl transition-all shadow-md shadow-sky-500/30">
             Pedir presupuesto personalizado →
           </button>
         </div>
